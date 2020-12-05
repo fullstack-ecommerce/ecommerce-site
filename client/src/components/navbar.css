@@ -1,0 +1,23 @@
+.header__container {
+  max-width: 1300px;
+  margin: auto;
+  padding-left: 25px;
+  padding-right: 25px;
+}
+
+.navbar__container {
+  display: flex;
+  align-items: center;
+  padding: 20px;
+}
+
+.link__container {
+  flex: 1;
+  text-align: right;
+}
+
+.link__container a {
+  margin-right: 20px;
+  text-decoration: none;
+  color: #555555;
+}
