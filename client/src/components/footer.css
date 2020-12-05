@@ -28,7 +28,7 @@
 
 .footer__column__1 {
   flex-basis: 30%;
-  padding-left: 25px;
+  padding-left: 45px;
 }
 
 .footer__column__2 {
@@ -50,6 +50,11 @@
   justify-content: center;
 }
 
+.footer__column__3 a,
+.footer__column__4 a {
+  color: #ffffff;
+}
+
 .logo__container {
   margin-top: 20px;
 }
@@ -69,5 +74,5 @@
 }
 
 .row__container {
-    display: flex;
+  display: flex;
 }

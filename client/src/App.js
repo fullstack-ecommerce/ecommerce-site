@@ -1,12 +1,16 @@
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Footer from "./components/Footer";
-import Navbar from './components/Navbar'
+import Navbar from "./components/Navbar";
+import HomeScreen from "./screens/HomeScreen";
 
 function App() {
   return (
     <Router>
       <Navbar />
-      <h1>eCommerce Site</h1>
+      <Switch>
+        <Route exact path="/" component={HomeScreen} />
+      </Switch>
+
       <Footer />
     </Router>
   );

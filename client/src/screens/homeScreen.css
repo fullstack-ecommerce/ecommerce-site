@@ -1,0 +1,33 @@
+.home__container {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  padding-left: 45px;
+  background: radial-gradient(#fff, #ffd6d6);
+}
+
+.column__one {
+  flex-basis: 50%;
+  min-width: 300px;
+}
+
+.column__one img {
+  max-width: 100%;
+  padding: 50px 0;
+}
+
+.column__one h1 {
+  font-size: 50px;
+  line-height: 60px;
+  margin: 25px 0;
+}
+
+.explore__button {
+  display: inline-block;
+  background: #ff523b;
+  color: #ffffff;
+  padding: 8px 30px;
+  margin: 30px 0;
+  border-radius: 30px;
+}
