@@ -5,6 +5,7 @@ import FeaturedProducts from "../components/FeaturedProducts";
 import LatestProducts from "../components/LatestProducts";
 import ExclusiveOffer from "../components/ExclusiveOffer";
 import Testimonials from "../components/Testimonials";
+import Brands from "../components/Brands";
 
 const HomeScreen = () => {
   return (
@@ -15,6 +16,7 @@ const HomeScreen = () => {
       <LatestProducts />
       <ExclusiveOffer />
       <Testimonials />
+      <Brands />
     </>
   );
 };

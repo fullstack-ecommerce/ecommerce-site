@@ -9,6 +9,7 @@ const Testimonials = () => {
     <>
       <div className="testimonial__container">
         <div className="small__container">
+          <h2 className="featured__title">Testimonials</h2>
           <div className="row__container">
             <div className="column__two">
               <i class="fas fa-quote-left"></i>
