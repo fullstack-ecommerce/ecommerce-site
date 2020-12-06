@@ -1,0 +1,88 @@
+.add__button {
+  display: inline-block;
+  background: #ff523b;
+  color: #ffffff;
+  padding: 8px 30px;
+  margin: 30px 0;
+  border-radius: 30px;
+  transition: background 0.5s;
+  cursor: pointer;
+}
+
+.add__button:hover {
+  background: #563434;
+}
+
+.single__product {
+  margin-top: 80px;
+}
+
+.single__product .column__one img {
+  padding: 0;
+}
+
+.single__product .column__one {
+  padding: 20px;
+}
+
+.single__product h4 {
+  margin: 20px 0;
+  font-size: 22px;
+  font-weight: bold;
+}
+
+.single__product select {
+  display: block;
+  padding: 10px;
+  margin-top: 20px;
+}
+
+.single__product input {
+  width: 50px;
+  height: 40px;
+  padding-left: 10px;
+  font-size: 20px;
+  margin-right: 10px;
+  border: 1px solid #ff523b;
+}
+
+input:focus {
+  outline: none;
+}
+
+.single__product .fas {
+  color: #ff523b;
+  margin-left: 10px;
+}
+
+.small__img__row {
+  display: flex;
+  justify-content: space-between;
+}
+
+.small__img__col {
+  flex-basis: 24%;
+  cursor: pointer;
+}
+
+@media only screen and (max-width: 600px) {
+  .small__img__row {
+    text-align: center;
+  }
+  .column__one,
+  .column__two,
+  .column__three {
+    flex-basis: 100%;
+  }
+  .single__product .small__img__row {
+    text-align: left;
+  }
+
+  .single__product .column__one {
+    padding: 20px 0;
+  }
+
+  .column__one h1 {
+    font-size: 26px;
+  }
+}
