@@ -1,12 +1,12 @@
 import React from "react";
-import logoGodrej from "../assets/images/logoGodrej.png";
-import logoOppo from "../assets/images/logoOppo.png";
-import logoCocaCola from "../assets/images/logoCocaCola.png";
-import logoPaypal from "../assets/images/logoPaypal.png";
-import logoPhilips from "../assets/images/logoPhilips.png";
+import logoGodrej from "../../assets/images/logoGodrej.png";
+import logoOppo from "../../assets/images/logoOppo.png";
+import logoCocaCola from "../../assets/images/logoCocaCola.png";
+import logoPaypal from "../../assets/images/logoPaypal.png";
+import logoPhilips from "../../assets/images/logoPhilips.png";
 import "./brands.css";
 
-const Brands = () => {
+const RenderBrands = () => {
   return (
     <>
       <div className="brands__container">
@@ -34,4 +34,4 @@ const Brands = () => {
   );
 };
 
-export default Brands;
+export default RenderBrands;
