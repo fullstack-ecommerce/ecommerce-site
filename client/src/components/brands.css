@@ -1,0 +1,32 @@
+.brands__container {
+  margin: 100px auto;
+}
+
+.column__four {
+  width: 160px;
+}
+
+.column__four img {
+  width: 100%;
+  cursor: pointer;
+  filter: grayscale(100%);
+}
+
+.column__four img:hover {
+  filter: grayscale(0);
+}
+
+.small__container {
+  max-width: 1080px;
+  margin: auto;
+  padding-left: 25px;
+  padding-right: 25px;
+}
+
+.row__container {
+  margin: 70px 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}

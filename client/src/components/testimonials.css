@@ -1,0 +1,38 @@
+.testimonial__container {
+  padding-top: 100px;
+}
+
+.testimonial__container .column__two {
+  text-align: center;
+  padding: 40px 20px;
+  box-shadow: 0 0 20px 0px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  transition: transform 0.5s;
+}
+
+.testimonial__container .column__two img {
+  width: 50px;
+  margin-top: 20px;
+  border-radius: 50%;
+}
+
+.testimonial__container .column__two:hover {
+  transform: translateY(-10px);
+}
+
+.fas .fa-quote-left {
+  font-size: 34px;
+  color: #ff523b;
+}
+
+.column__two p {
+  font-size: 12px;
+  margin: 12px 0;
+  color: #777777;
+}
+
+.testimonial__container .column__two h3 {
+  font-weight: 600;
+  color: #555555;
+  font-size: 16px;
+}
