@@ -4,6 +4,7 @@ import Categories from "../components/Categories";
 import FeaturedProducts from "../components/FeaturedProducts";
 import LatestProducts from "../components/LatestProducts";
 import ExclusiveOffer from "../components/ExclusiveOffer";
+import Testimonials from "../components/Testimonials";
 
 const HomeScreen = () => {
   return (
@@ -11,8 +12,9 @@ const HomeScreen = () => {
       <Hero />
       <Categories />
       <FeaturedProducts />
-          <LatestProducts />
-          <ExclusiveOffer />
+      <LatestProducts />
+      <ExclusiveOffer />
+      <Testimonials />
     </>
   );
 };
