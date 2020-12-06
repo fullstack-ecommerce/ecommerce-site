@@ -1,11 +1,14 @@
 import express from 'express';
+import { validateId, validateProductBody } from '../middlewares/validateProducts';
 import { 
    add, 
    addProductSizeIds, 
    getProducts, 
    addSizes, 
    addImg, 
-   addProductImgIds 
+   addProductImgIds, 
+   update,
+   deleteProduct
 } from '../models/productModel';
 
 const route = express();
@@ -19,9 +22,10 @@ route.get("/get_all", async (req, res) => {
    }
 });
 
-route.post('/create', async (req, res) => {
-   const {name, price, sizes, images} = req.body;
-   const productBody = {name, price};
+route.post('/create', validateProductBody, async (req, res) => {
+   const {name, description, price, sizes, images} = req.body;
+   const productBody = {name, description, price};
+
    try {
       const [product] = await add(productBody);
       sizes.forEach(async (size: string) => {
@@ -37,5 +41,27 @@ route.post('/create', async (req, res) => {
       res.status(500).json({errorMessage: error.message});
    }
 });
+
+route.patch("/edit/:product_id", validateId, async (req, res) => {
+   const {product_id} = req.params;
+
+   try {
+      await update(product_id, req.body);
+      res.status(200).json({message: "Prodcut updated successfully!."})
+   } catch (error) {
+      res.status(500).json({errorMessage: error.message});
+   }
+});
+
+route.delete("/delete/:product_id", validateId, async (req, res) => {
+   const {product_id} = req.params;
+
+   try {
+      await deleteProduct(product_id);
+      res.status(200).json({message: "Product deleted successfully!"});
+   } catch (error) {
+      res.status(500).json({errorMessage: error.message});
+   }
+})
 
 export default route;

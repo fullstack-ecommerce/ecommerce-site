@@ -3,10 +3,11 @@ import bcrypt from 'bcryptjs';
 import { add, deleteUser, findBy, updateUser } from '../models/userModel';
 import { rounds } from '../envVariables';
 import { generateToken } from '../middlewares';
+import { validateId, validateUserBody } from '../middlewares/validateUser';
 
 const route = express();
 
-route.post("/register", async (req, res) => {
+route.post("/register", validateUserBody, async (req, res) => {
    const user = req.body; 
 
    const hashPassword = bcrypt.hashSync(user.password, rounds);
@@ -36,7 +37,7 @@ route.post('/login', async (req, res) => {
    }
 });
 
-route.delete("/delete/:user_id", async (req, res) => {
+route.delete("/delete/:user_id", validateId, async (req, res) => {
    const {user_id} = req.params;
 
    try {
@@ -47,7 +48,7 @@ route.delete("/delete/:user_id", async (req, res) => {
    }
 });
 
-route.patch("/edit/:user_id", async (req, res) => {
+route.patch("/edit/:user_id", validateId, async (req, res) => {
    const {user_id} = req.params;
    const changes = req.body;
 
