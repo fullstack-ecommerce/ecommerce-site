@@ -1,8 +1,8 @@
 import React from "react";
 import { Product } from "../../components/Product";
-import "./productsScreen.css";
+import "./productsListScreen.css";
 
-const RenderProductsScreen = () => {
+const RenderProductsListScreen = () => {
   return (
     <div className="small__container">
       <div className="row__container">
@@ -41,4 +41,4 @@ const RenderProductsScreen = () => {
   );
 };
 
-export default RenderProductsScreen;
+export default RenderProductsListScreen;

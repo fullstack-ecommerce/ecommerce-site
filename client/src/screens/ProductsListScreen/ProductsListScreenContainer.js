@@ -1,10 +1,10 @@
 import React from "react";
-import RenderProductsScreen from "./RenderProductsScreen";
+import RenderProductsListScreen from "./RenderProductsListScreen";
 
 const ProductsScreenContainer = () => {
   return (
     <div>
-      <RenderProductsScreen />
+      <RenderProductsListScreen />
     </div>
   );
 };
