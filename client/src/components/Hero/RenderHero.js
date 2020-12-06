@@ -1,9 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import image1 from "../assets/images/image1.png";
+import image1 from "../../assets/images/image1.png";
 import "./hero.css";
 
-const Hero = () => {
+const RenderHero = () => {
   return (
     <div className="home__container">
       <div className="column__one">
@@ -16,7 +16,7 @@ const Hero = () => {
           Consistent
           <br /> hard work gains success. Greatness will come.
         </p>
-        <Link>
+        <Link to="/products">
           <button className="explore__button">Explore Now &#8594;</button>
         </Link>
       </div>
@@ -28,4 +28,4 @@ const Hero = () => {
   );
 };
 
-export default Hero;
+export default RenderHero;

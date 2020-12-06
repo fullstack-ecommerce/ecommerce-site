@@ -1,9 +1,10 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import logo from "../assets/images/logo.png";
+import logo from "../../assets/images/logo.png";
+import cartIcon from "../../assets/images/cart.png";
 import "./navbar.css";
 
-const Navbar = () => {
+const RenderNavbar = () => {
   return (
     <div className="header__container">
       <div className="navbar__container">
@@ -20,9 +21,10 @@ const Navbar = () => {
           <Link to="/contact">Contact</Link>
           <Link to="/account">Account</Link>
         </div>
+        <img src={cartIcon} alt="cart icon" className="cart__icon" />
       </div>
     </div>
   );
 };
 
-export default Navbar;
+export default RenderNavbar;

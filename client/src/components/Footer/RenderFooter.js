@@ -1,11 +1,11 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import logoWhite from "../assets/images/logoWhite.png";
-import playStore from "../assets/images/playStore.png";
-import appStore from "../assets/images/appStore.png";
+import logoWhite from "../../assets/images/logoWhite.png";
+import playStore from "../../assets/images/playStore.png";
+import appStore from "../../assets/images/appStore.png";
 import "./footer.css";
 
-const Footer = () => {
+const RenderFooter = () => {
   return (
     <div className="footer__container">
       <div className="list__container">
@@ -37,16 +37,20 @@ const Footer = () => {
 
           <div className="footer__column__4">
             <h3>Follow Us</h3>
-            <a href="https://www.facebook.com" target="_blank">
+            <a href="https://www.facebook.com" target="_blank" rel="noreferrer">
               Facebook
             </a>
-            <a href="https://www.twitter.com" target="_blank">
+            <a href="https://www.twitter.com" target="_blank" rel="noreferrer">
               Twitter
             </a>
-            <a href="https://www.instagram.com" target="_blank">
+            <a
+              href="https://www.instagram.com"
+              target="_blank"
+              rel="noreferrer"
+            >
               Instagram
             </a>
-            <a href="https://www.youtube.com" target="_blank">
+            <a href="https://www.youtube.com" target="_blank" rel="noreferrer">
               YouTube
             </a>
           </div>
@@ -60,4 +64,4 @@ const Footer = () => {
   );
 };
 
-export default Footer;
+export default RenderFooter;

@@ -1,8 +1,8 @@
 import React from "react";
-import exclusive from "../assets/images/exclusive.png";
+import exclusive from "../../assets/images/exclusive.png";
 import "./exclusiveOffer.css";
 
-const ExclusiveOffer = () => {
+const RenderExclusiveOffer = () => {
   return (
     <>
       <div className="offer__container">
@@ -28,4 +28,4 @@ const ExclusiveOffer = () => {
   );
 };
 
-export default ExclusiveOffer;
+export default RenderExclusiveOffer;
