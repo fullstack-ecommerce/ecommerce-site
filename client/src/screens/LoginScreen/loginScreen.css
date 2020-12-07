@@ -1,0 +1,107 @@
+.login__container {
+  padding: 50px 0;
+  background: radial-gradient(#fff, #ffd6d6);
+}
+
+.column__one img {
+  width: 100%;
+}
+
+.form__container {
+  background: #ffffff;
+  width: 300px;
+  height: 400px;
+  position: relative;
+  text-align: center;
+  padding: 20px 0;
+  margin: auto;
+  box-shadow: 0 0 20px 0px rgba(0, 0, 0, 0.1);
+}
+
+.form__container h3 {
+  font-weight: bold;
+  padding: 0 10px;
+  color: #555555;
+  cursor: pointer;
+  width: 100px;
+  display: inline-block;
+}
+
+.form__btn {
+  display: inline-block;
+}
+
+.form__container form {
+  max-width: 300px;
+  padding: 0 20px;
+  position: absolute;
+  top: 100px;
+}
+
+form input {
+  width: 100%;
+  height: 30px;
+  margin: 10px 0;
+  padding: 0 10px;
+  border: 1px solid #cccccc;
+}
+
+form .login__btn {
+  width: 100%;
+  border: none;
+  cursor: pointer;
+  margin: 10px 0;
+}
+
+form .login__btn:focus {
+  outline: none;
+}
+
+.register__link {
+  padding-top: 40px;
+  font-size: 14px;
+}
+
+.login__btn {
+  display: inline-block;
+  background: #ff523b;
+  color: #ffffff;
+  padding: 8px 30px;
+  margin: 30px 0;
+  border-radius: 30px;
+  transition: background 0.5s;
+  cursor: pointer;
+}
+
+.login__btn:hover {
+  background: #563434;
+}
+
+#indicator {
+  width: 100px;
+  border: none;
+  background: #ff523b;
+  height: 3px;
+  margin-top: 8px;
+}
+
+@media only screen and (max-width: 600px) {
+  .row__container {
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+  }
+
+  .column__one {
+    margin-bottom: 10px;
+  }
+
+  .login__container {
+    padding: 0;
+  }
+
+  .column__one img {
+    margin: 0;
+    width: 400px;
+  }
+}

@@ -17,9 +17,9 @@ const RenderNavbar = () => {
         <div className="link__container">
           <Link to="/">Home</Link>
           <Link to="/products">Products</Link>
-          <Link to="/about">About</Link>
-          <Link to="/contact">Contact</Link>
-          <Link to="/account">Account</Link>
+          {/* remove login and register links when user is logged in, show user's name */}
+          <Link to="/login">Login</Link>
+          <Link to="/register">Register</Link>
         </div>
         <img src={cartIcon} alt="cart icon" className="cart__icon" />
       </div>
