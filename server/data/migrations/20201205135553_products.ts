@@ -4,6 +4,7 @@ export async function up(knex: Knex): Promise<any> {
    return knex.schema.createTable("product", table => {
       table.increments();
       table.string("name",255).notNullable();
+      table.string("description",255).notNullable();
       table.integer("price").notNullable();
    })
    .createTable("sizes", table => {
@@ -52,5 +53,6 @@ export async function down(knex: Knex): Promise<any> {
       .dropTableIfExists("product_img")
       .dropTableIfExists("product_size")
       .dropTableIfExists("images")
+      .dropSchemaIfExists("sizes")
       .dropTableIfExists("product");
 };

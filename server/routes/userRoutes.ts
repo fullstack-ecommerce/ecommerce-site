@@ -1,13 +1,13 @@
 import express from 'express';
 import bcrypt from 'bcryptjs';
-import jwt from 'jsonwebtoken';
-import { add, findBy } from '../models/userModel';
-import { rounds, secret_jtw } from '../envVariables';
-import { UserProps } from '../interfaces';
+import { add, deleteUser, findBy, updateUser } from '../models/userModel';
+import { rounds } from '../envVariables';
+import { generateToken } from '../middlewares';
+import { validateId, validateUserBody } from '../middlewares/validateUser';
 
 const route = express();
 
-route.post("/register", async (req, res) => {
+route.post("/register", validateUserBody, async (req, res) => {
    const user = req.body; 
 
    const hashPassword = bcrypt.hashSync(user.password, rounds);
@@ -37,19 +37,36 @@ route.post('/login', async (req, res) => {
    }
 });
 
-function generateToken(user: UserProps) {
-   if(secret_jtw) {
-      const payload = {
-         user: user.email
-      };
-      const options = {
-         expiresIn: "1h"
-      };
-      return jwt.sign(payload, secret_jtw, options);
+route.delete("/delete/:user_id", validateId, async (req, res) => {
+   const {user_id} = req.params;
+
+   try {
+      await deleteUser(user_id);
+      res.status(200).json({message: "Account was delete successfully!."});
+   } catch (error) {
+      res.status(500).json({errorMessage: error.message});
    }
-   return;
+});
 
-}
+route.patch("/edit/:user_id", validateId, async (req, res) => {
+   const {user_id} = req.params;
+   const changes = req.body;
 
+   try {
+      if(changes.email) {
+         res.status(400).json({errorMessage: "Not allow to change email."});
+      } else if(changes.username) {
+         await updateUser(user_id, changes);
+         res.status(200).json({message: "Username updated successfully!"});
+      } else {
+         const hashPassword = bcrypt.hashSync(changes.password, rounds);
+         changes.password = hashPassword;
+         await updateUser(user_id, changes);
+         res.status(200).json({message: "Password updated succesfully!"});
+      }
+   } catch (error) {
+      res.status(500).json({errorMessage: error.message});
+   }
+});
 
 export default route;
