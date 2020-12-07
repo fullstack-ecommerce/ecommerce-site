@@ -28,7 +28,7 @@ route.post("/add/:user_id", validateCartBody, validateId, async (req, res) => {
       const [id] = await addToCart(req.body);
       const body = { user_id: Number(user_id), cart_item_id: id};
       await userCartIds(body);
-      res.status(201).json(id);
+      res.status(201).json({message: "Product added sucessfully!."});
    } catch (error) {
       res.status(500).json({errorMessage: error.message});
    }
