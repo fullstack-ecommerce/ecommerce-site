@@ -76,3 +76,13 @@
 .row__container {
   display: flex;
 }
+
+@media only screen and (max-width: 600px) {
+  .footer__column__1 h3 {
+    text-align: center;
+  }
+
+  .footer__column__2 {
+    width: 80%;
+  }
+}

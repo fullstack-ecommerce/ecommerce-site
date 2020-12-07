@@ -5,6 +5,7 @@ import { HomeScreen } from "./screens/HomeScreen";
 import { LoginScreen } from "./screens/LoginScreen";
 import { ProductScreen } from "./screens/ProductScreen";
 import { ProductsListScreen } from "./screens/ProductsListScreen";
+import { RegisterScreen } from "./screens/RegisterScreen";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
         {/*<Route exact path="/products/:id" component={ProductScreen} /> */}
 
         <Route exact path="/login" component={LoginScreen} />
+        <Route exact path="/register" component={RegisterScreen} />
         <Route exact path="/" component={HomeScreen} />
       </Switch>
       <Footer />
