@@ -30,3 +30,15 @@ export interface ProductSizeIdsProps {
    size_id: number;
    product_id: number;
 }
+
+export interface CartItemsProps {
+   product_name?: string;
+   product_price?: number;
+   quantity?: number;
+   product_img?: string;
+}
+
+export interface CartUserItemIdsProps {
+   user_id: number;
+   cart_item_id: number;
+}
