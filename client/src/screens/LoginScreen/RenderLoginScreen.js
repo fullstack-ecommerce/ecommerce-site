@@ -33,7 +33,7 @@ const RenderLoginScreen = () => {
   return (
     <div className="login__container">
       <div className="row__container">
-        <div className="column__one">
+        <div className="column__one logo__image">
           <img src={image1} alt="logo" />
         </div>
 
