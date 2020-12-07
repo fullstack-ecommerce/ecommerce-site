@@ -29,8 +29,8 @@ const RenderFooter = () => {
 
           <div className="footer__column__3">
             <h3>Useful Links</h3>
-            <Link to="/coupons">Coupons</Link>
-            <Link to="/blog">Blog Post</Link>
+            <Link to="/contact">Contact</Link>
+            <Link to="/about">About</Link>
             <Link to="/return">Return Policy</Link>
             <Link to="/affiliate">Join Affiliate</Link>
           </div>

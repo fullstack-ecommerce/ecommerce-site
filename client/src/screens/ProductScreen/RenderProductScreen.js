@@ -39,11 +39,11 @@ const RenderProductScreen = () => {
             <h4>$50.00</h4>
             <select>
               <option>Select Size</option>
-              <option>XXL</option>
-              <option>XL</option>
-              <option>Large</option>
-              <option>Medium</option>
-              <option>Small</option>
+              <option value="xxl">XXL</option>
+              <option value="xl">XL</option>
+              <option value="large">Large</option>
+              <option value="medium">Medium</option>
+              <option value="small">Small</option>
             </select>
             <input type="number" />
             <button className="add__button">Add To Cart</button>
