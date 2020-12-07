@@ -104,4 +104,8 @@ form .login__btn:focus {
     margin: 0;
     width: 400px;
   }
+
+  .logo__image {
+    display: none;
+  }
 }

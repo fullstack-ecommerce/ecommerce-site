@@ -32,10 +32,11 @@ const RenderNavbar = () => {
           <Link to="/products">Products</Link>
           {/* remove login and register links when user is logged in, show user's name */}
           {userInfo ? (
-            <>
+            <div>
+              <h6>Welcome</h6>
               <h3>{userInfo.username}</h3>
               <button onClick={logoutHandler}>Logout</button>
-            </>
+            </div>
           ) : (
             <>
               <Link to="/login">Login</Link>
