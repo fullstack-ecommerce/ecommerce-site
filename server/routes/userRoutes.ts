@@ -2,12 +2,17 @@ import express from 'express';
 import bcrypt from 'bcryptjs';
 import { add, deleteUser, findBy, updateUser } from '../models/userModel';
 import { rounds } from '../envVariables';
-import { generateToken } from '../middlewares';
-import { validateId, validateUserBody } from '../middlewares/validateUser';
+import { generateToken, onError } from '../middlewares';
+import { 
+   checkifEmailExist, 
+   validateId, 
+   validateLoginValues, 
+   validateUserBody 
+} from '../middlewares/validateUser';
 
 const route = express();
 
-route.post("/register", validateUserBody, async (req, res) => {
+route.post("/register", validateUserBody, checkifEmailExist, async (req, res) => {
    const user = req.body; 
 
    const hashPassword = bcrypt.hashSync(user.password, rounds);
@@ -21,7 +26,7 @@ route.post("/register", validateUserBody, async (req, res) => {
    }
 });
 
-route.post('/login', async (req, res) => {
+route.post('/login', validateLoginValues, async (req, res) => {
    const {email, password} = req.body;
 
    try {
@@ -30,7 +35,7 @@ route.post('/login', async (req, res) => {
          const token = generateToken(user);
          res.status(200).json({token, username: user.username});
       } else {
-         res.status(400).json({errorMessage: "Invalid email or password"});
+         return onError(res, 400, "Invalid email or password");
       }
    } catch (error) {
       res.status(500).json({errorMessage: error.message});
@@ -54,7 +59,7 @@ route.patch("/edit/:user_id", validateId, async (req, res) => {
 
    try {
       if(changes.email) {
-         res.status(400).json({errorMessage: "Not allow to change email."});
+         return onError(res, 400, "Not allow to change email.");
       } else if(changes.username) {
          await updateUser(user_id, changes);
          res.status(200).json({message: "Username updated successfully!"});

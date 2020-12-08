@@ -6,6 +6,7 @@ import {
    updatedPasswordEmail 
 } from '../emailFiles/sendEmails';
 import { resetPassword, rounds } from '../envVariables';
+import { onError } from '../middlewares';
 import { findBy, updateUser } from '../models/userModel';
 
 const route = express.Router();
@@ -14,11 +15,14 @@ route.patch("/forgot_password",  async (req, res) => {
    const { email } = req.body;
    
    if(!resetPassword) return;
+   if(!email) {
+      return onError(res, 400, "Enter require fields");
+   }
 
    try {
       const [user] = await findBy({email});
       if(!user) {
-         res.status(404).json({errorMessage: "Invalid email!."});
+         return onError(res, 404, "Invalid email!.");
       } else {
          const token = jwt.sign({user: user.email}, resetPassword, {expiresIn: "10m"});
 
@@ -36,13 +40,14 @@ route.patch('/reset_password/:token', async (req, res) => {
    const newPassword = req.body;
 
    if(!resetPassword) return;
+   if(!newPassword.password) {
+      return onError(res, 400, "Enter require fields!.");
+   }
 
    if(reset_link) {
       jwt.verify(reset_link, resetPassword, (error, decodedToken) => {
          if(error) {
-            res
-               .status(401)
-               .json({errorMessage: "Incorrect token or it is expired!."});
+            return onError(res, 401, "Incorrect token or it is expired!.");
          }
       });
    }
@@ -50,10 +55,9 @@ route.patch('/reset_password/:token', async (req, res) => {
    try {
       const [user] = await findBy({reset_link});
       if(!user) {
-         res
-            .status(400)
-            .json({errorMessage: "User with this link does not exist!."});
+         return onError(res, 400, "User with this link does not exist!.");
       }
+      
       const hashPassword = bcrypt.hashSync(newPassword.password, rounds);
       newPassword.password = hashPassword;
 

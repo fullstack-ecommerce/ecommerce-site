@@ -15,3 +15,7 @@ export function generateToken(user: UserProps) {
    return;
 
 }
+
+export function onError(res: any, statusCode: number, message: string) {
+   return res.status(statusCode).json({errorMessage: message});
+}
