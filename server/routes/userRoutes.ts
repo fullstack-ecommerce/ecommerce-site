@@ -1,6 +1,6 @@
 import express from 'express';
 import bcrypt from 'bcryptjs';
-import { add, deleteUser, findBy, updateUser } from '../models/userModel';
+import { add, deleteUser, findBy, getUsers, updateUser } from '../models/userModel';
 import { rounds } from '../envVariables';
 import { generateToken, onError } from '../middlewares';
 import { 
@@ -11,6 +11,15 @@ import {
 } from '../middlewares/validateUser';
 
 const route = express();
+
+route.get("/users", async (req, res) => {
+   try {
+      const users = await getUsers();
+      res.status(200).json(users);
+   } catch (error) {
+      res.status(500).json({errorMessage: error.message});   
+   }
+})
 
 route.post("/register", validateUserBody, checkifEmailExist, async (req, res) => {
    const user = req.body; 
