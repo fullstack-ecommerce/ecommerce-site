@@ -6,6 +6,7 @@ export async function up(knex: Knex): Promise<any> {
       table.string("username",255).notNullable();
       table.string("email", 128).notNullable().unique();
       table.string("password",128).notNullable();
+      table.boolean("is_admin").defaultTo(false);
       table.string("reset_link",255);
    })
    .createTable("cart_item", table => {
