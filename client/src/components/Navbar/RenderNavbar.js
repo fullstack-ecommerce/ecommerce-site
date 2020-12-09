@@ -12,7 +12,7 @@ const RenderNavbar = () => {
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
 
-  console.log(userInfo)
+  console.log(userInfo);
 
   const logoutHandler = () => {
     dispatch(logout());
@@ -32,10 +32,11 @@ const RenderNavbar = () => {
           <Link to="/products">Products</Link>
           {/* remove login and register links when user is logged in, show user's name */}
           {userInfo ? (
-            <>
+            <div>
+              <h6>Welcome</h6>
               <h3>{userInfo.username}</h3>
               <button onClick={logoutHandler}>Logout</button>
-            </>
+            </div>
           ) : (
             <>
               <Link to="/login">Login</Link>
@@ -43,7 +44,9 @@ const RenderNavbar = () => {
             </>
           )}
         </div>
-        <img src={cartIcon} alt="cart icon" className="cart__icon" />
+        <Link to="/cartscreen">
+          <img src={cartIcon} alt="cart icon" className="cart__icon" />
+        </Link>
       </div>
     </div>
   );
