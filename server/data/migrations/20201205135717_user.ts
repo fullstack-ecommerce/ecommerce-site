@@ -6,6 +6,8 @@ export async function up(knex: Knex): Promise<any> {
       table.string("username",255).notNullable();
       table.string("email", 128).notNullable().unique();
       table.string("password",128).notNullable();
+      table.boolean("is_admin").defaultTo(false);
+      table.timestamp('created_at').defaultTo(knex.fn.now());
       table.string("reset_link",255);
    })
    .createTable("cart_item", table => {
@@ -14,9 +16,11 @@ export async function up(knex: Knex): Promise<any> {
       table.integer("product_price").notNullable();
       table.integer("quantity").notNullable();
       table.string("product_img",255).notNullable();
+      table.timestamp('created_at').defaultTo(knex.fn.now());
    })
    .createTable("user_cart", table => {
       table.increments();
+      table.timestamp('created_at').defaultTo(knex.fn.now());
       table.integer("user_id")
          .unsigned()
          .notNullable()
