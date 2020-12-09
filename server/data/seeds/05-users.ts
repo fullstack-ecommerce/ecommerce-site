@@ -12,7 +12,7 @@ export async function seed(knex: Knex) {
             username: "user One", 
             email: "userone@gmail.com",
             password: await bcrypt.hash("password", 8), 
-            is_admin: false
+            is_admin: true
          },
         {
             username: "user Two", 
