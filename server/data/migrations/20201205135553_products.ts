@@ -53,6 +53,6 @@ export async function down(knex: Knex): Promise<any> {
       .dropTableIfExists("product_img")
       .dropTableIfExists("product_size")
       .dropTableIfExists("images")
-      .dropSchemaIfExists("sizes")
+      .dropTableIfExists("sizes")
       .dropTableIfExists("product");
 };
