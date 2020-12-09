@@ -44,3 +44,23 @@ export interface CartUserItemIdsProps {
    user_id: number;
    cart_item_id: number;
 }
+
+export interface CommentProps {
+   comment: string;
+}
+
+export interface CommentProductIdsProps {
+   product_id: number;
+   user_id: number;
+   comment_id: number;
+}
+
+export interface RatingProps {
+   rating: number;
+}
+
+export interface RatingProductIdsProps {
+   product_id: number,
+   user_id: number;
+   rating_id: number
+}
