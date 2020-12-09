@@ -4,6 +4,7 @@ export async function up(knex: Knex): Promise<any> {
    return knex.schema.createTable("comments", table => {
       table.increments();
       table.string("comment", 255).notNullable();
+      table.timestamp('created_at').defaultTo(knex.fn.now());
    })
    .createTable("product_comments", table => {
       table.increments();

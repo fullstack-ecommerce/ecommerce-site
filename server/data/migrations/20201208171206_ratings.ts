@@ -4,6 +4,7 @@ export async function up(knex: Knex): Promise<any> {
    return knex.schema.createTable("ratings", table => {
       table.increments();
       table.float("rating").notNullable();
+      table.timestamp('created_at').defaultTo(knex.fn.now());
    })
    .createTable("product_ratings", table => {
       table.increments();
