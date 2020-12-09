@@ -12,7 +12,7 @@ const RenderNavbar = () => {
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
 
-  console.log(userInfo)
+  console.log(userInfo);
 
   const logoutHandler = () => {
     dispatch(logout());
@@ -44,7 +44,9 @@ const RenderNavbar = () => {
             </>
           )}
         </div>
-        <img src={cartIcon} alt="cart icon" className="cart__icon" />
+        <Link to="/cartscreen">
+          <img src={cartIcon} alt="cart icon" className="cart__icon" />
+        </Link>
       </div>
     </div>
   );
