@@ -6,6 +6,11 @@ function findById(id: string) {
    return db('users').where({id});
 }
 
+function getUsers() {
+   return db("users as u")
+      .select("u.id", "u.username", "u.email");
+}
+
 function findBy(filter: FindByProp) {
    return db("users").where(filter);
 }
@@ -25,6 +30,7 @@ function deleteUser(id: string) {
 
 export {
    findById,
+   getUsers,
    findBy,
    add,
    updateUser,
