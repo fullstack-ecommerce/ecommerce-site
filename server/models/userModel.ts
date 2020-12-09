@@ -8,7 +8,7 @@ function findById(id: string) {
 
 function getUsers() {
    return db("users as u")
-      .select("u.id", "u.username", "u.email", "u.is_admin");
+      .select("u.id", "u.username", "u.email", "u.is_admin", "u.created_at");
 }
 
 function findBy(filter: FindByProp) {
