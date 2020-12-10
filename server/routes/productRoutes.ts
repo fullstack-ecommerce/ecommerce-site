@@ -1,4 +1,6 @@
 import express from 'express';
+import { ResultProp } from '../interfaces';
+import { onError } from '../middlewares';
 import { validateId, validateProductBody } from '../middlewares/validateProducts';
 import { 
    add, 
@@ -20,6 +22,40 @@ route.get("/get_all", async (req, res) => {
    } catch (error) {
       res.status(500).json({errorMessage: error.message});
    }
+});
+
+// /product/get?page={pageNumber}&limit={limitNumber}
+route.get("/get", async (req, res) => {
+   const page = Number(req.query.page);
+   const limit = Number(req.query.limit);
+
+   const result: ResultProp = {};
+
+   const products = await getProducts();
+
+   const starts = (page - 1) * limit;
+   const ends = page * limit;
+   const maxPage = Math.ceil(products.length / limit);
+
+   if(ends < products.length) {
+      result.next = {
+         page: page + 1,
+         limit: limit
+      };
+   }
+
+   if(starts > 0) {
+      result.previous = {
+         page: page - 1,
+         limit: limit
+      };
+   }
+
+   if(page > maxPage) {
+      return onError(res, 500, "Page does not exist!.");
+   }
+   result.paginatedProducts = products.slice(starts, ends);
+   res.status(200).json(result);
 });
 
 route.post('/create', validateProductBody, async (req, res) => {
