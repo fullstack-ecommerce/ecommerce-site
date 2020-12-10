@@ -16,14 +16,9 @@ function App() {
       <Navbar />
       <Switch>
         <Route exact path="/products" component={ProductsListScreen} />
+        <Route exact path="/products/:id" component={ProductScreen} />
 
-        {/* Need to change this path when there is a product ID */}
-        <Route exact path="/productscreen" component={ProductScreen} />
-        {/*<Route exact path="/products/:id" component={ProductScreen} /> */}
-
-        {/* Need to change this path when there is cart ID */}
         <Route exact path="/cartscreen" component={CartScreen} />
-        {/*<Route exact path="/cart/:id" component={CartScreen} />*/}
 
         <Route exact path="/login" component={LoginScreen} />
         <Route exact path="/register" component={RegisterScreen} />

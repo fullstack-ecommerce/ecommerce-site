@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { Product } from "../../components/Product";
 import { listProducts } from "../../state/actions/productActions";
@@ -31,23 +32,19 @@ const RenderProductsListScreen = () => {
           <option value="">Sort by sale</option>
         </select>
       </div>
-      {products.map((product) => (
-        <h3>{product.name}</h3>
-      ))}
+
       <div className="row__container">
-        <div className="column__three">
-          <Product />
-        </div>
-        <div className="column__three">
-          <Product />
-        </div>
-        <div className="column__three">
-          <Product />
-        </div>
-        <div className="column__three">
-          <Product />
-        </div>
+        {products.map((product) => {
+          return (
+            <Link to={`/products/${product.id}`} key={product.id}>
+              <div className="column__three">
+                <Product product={product} />
+              </div>
+            </Link>
+          );
+        })}
       </div>
+
       {/* pagination button*/}
       <div className="page__btn">
         <span>1</span>

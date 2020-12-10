@@ -1,10 +1,10 @@
 import React from 'react'
 import RenderProduct from './RenderProduct'
 
-const ProductContainer = () => {
+const ProductContainer = (props) => {
     return (
         <div>
-            <RenderProduct />
+            <RenderProduct product={props.product} />
         </div>
     )
 }
