@@ -23,6 +23,26 @@ export interface SizesProps {
    size: string;
 }
 
+export interface NextPage {
+   page: number;
+   limit: number;
+}
+
+export interface CreateProductsProps {
+   name: string;
+   description: string;
+   price: number;
+   sizes: SizesProps[];
+   images: ImgsProps[];
+}
+
+export interface ResultProp {
+   next?: NextPage;
+   previous?: NextPage;
+   paginatedProducts?: CreateProductsProps[];
+}
+
+
 export interface ProductImgIdsProps {
    product_id: number;
    img_id: number;
