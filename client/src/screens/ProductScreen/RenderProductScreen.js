@@ -10,6 +10,11 @@ import product4 from "../../assets/images/product4.jpg";
 import "./productScreen.css";
 
 const RenderProductScreen = () => {
+  const addToCartHandler = (id) => {
+    // need to work on this
+    console.log("need to figure this out");
+  };
+
   return (
     <>
       <div className="small__container single__product">
@@ -46,7 +51,13 @@ const RenderProductScreen = () => {
               <option value="small">Small</option>
             </select>
             <input type="number" />
-            <button className="add__button">Add To Cart</button>
+            <button
+              className="add__button"
+              type="button"
+              onClick={addToCartHandler}
+            >
+              Add To Cart
+            </button>
             <h3>
               Product Details <i className="fas fa-indent"></i>
             </h3>
