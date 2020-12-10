@@ -8,6 +8,8 @@ import { ProductScreen } from "./screens/ProductScreen";
 import { ProductsListScreen } from "./screens/ProductsListScreen";
 import { RegisterScreen } from "./screens/RegisterScreen";
 
+// hello there
+
 function App() {
   return (
     <Router>
