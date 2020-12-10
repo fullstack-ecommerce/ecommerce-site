@@ -1,12 +1,28 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Product } from "../../components/Product";
+import { listProducts } from "../../state/actions/productActions";
 import "./productsListScreen.css";
 
 const RenderProductsListScreen = () => {
+  const dispatch = useDispatch();
+
+  const productList = useSelector((state) => state.productList);
+  const { loading, error, products } = productList;
+
+  const userLogin = useSelector((state) => state.userLogin);
+  const { userInfo } = userLogin;
+
+  useEffect(() => {
+    dispatch(listProducts());
+  }, [dispatch]);
+
   return (
     <div className="small__container">
       <div className="row__container">
         <h2 className="featured__title">All Products</h2>
+        {loading && <h3>Loading...</h3>}
+        {error && <h3>{error}</h3>}
         <select name="filter" id="filter">
           <option value="">Default Sorting</option>
           <option value="">Sort by price</option>
@@ -15,6 +31,9 @@ const RenderProductsListScreen = () => {
           <option value="">Sort by sale</option>
         </select>
       </div>
+      {products.map((product) => (
+        <h3>{product.name}</h3>
+      ))}
       <div className="row__container">
         <div className="column__three">
           <Product />
