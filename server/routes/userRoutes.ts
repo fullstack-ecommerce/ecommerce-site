@@ -1,6 +1,12 @@
 import express from 'express';
 import bcrypt from 'bcryptjs';
-import { add, deleteUser, findBy, getUsers, updateUser } from '../models/userModel';
+import { 
+   add, 
+   deleteUser, 
+   findBy, 
+   getUsers,
+   updateUser 
+} from '../models/userModel';
 import { rounds } from '../envVariables';
 import { generateToken, onError } from '../middlewares';
 import { 
@@ -9,6 +15,7 @@ import {
    validateLoginValues, 
    validateUserBody 
 } from '../middlewares/validateUser';
+import { checkForRole, validateToken } from '../restricted/restrictedMiddleware';
 
 const route = express();
 
@@ -82,5 +89,17 @@ route.patch("/edit/:user_id", validateId, async (req, res) => {
       res.status(500).json({errorMessage: error.message});
    }
 });
+
+// add validteToken, checkForRole middewares later
+// not going to add it at the moment for faster teseting purposes
+route.patch("/change_role/:user_id", validateId, async (req, res) => {
+   const {user_id} = req.params;
+   try {
+      await updateUser(user_id, req.body);
+      res.status(200).json({message: "Role has been updated!."});
+   } catch (error) {
+      res.status(500).json({errorMessage: error.message});
+   }
+})
 
 export default route;
