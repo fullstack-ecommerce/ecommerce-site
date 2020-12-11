@@ -12,7 +12,9 @@ import {
    update,
    deleteProduct
 } from '../models/productModel';
+import { checkForRole, validateToken } from '../restricted/restrictedMiddleware';
 
+// add middlewares for CRUD operations only!
 const route = express();
 
 route.get("/get_all", async (req, res) => {

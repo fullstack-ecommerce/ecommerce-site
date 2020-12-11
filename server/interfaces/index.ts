@@ -3,6 +3,7 @@ export interface UserProps {
    email?: string;
    password?: string;
    reset_link?: string;
+   is_admin?: boolean;
 }
 
 export interface FindByProp {
