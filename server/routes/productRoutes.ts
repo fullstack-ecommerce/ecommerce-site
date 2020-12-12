@@ -1,5 +1,5 @@
 import express from 'express';
-import { ResultProp } from '../interfaces';
+import { ResultProp } from '../interfaces/productInterfaces';
 import { onError } from '../middlewares';
 import { validateId, validateProductBody } from '../middlewares/validateProducts';
 import { 
@@ -17,6 +17,7 @@ import { checkForRole, validateToken } from '../restricted/restrictedMiddleware'
 // add middlewares for CRUD operations only!
 const route = express();
 
+// @GET /product/get_all
 route.get("/get_all", async (req, res) => {
    try {
       const products = await getProducts();
@@ -26,7 +27,7 @@ route.get("/get_all", async (req, res) => {
    }
 });
 
-// /product/get?page={pageNumber}&limit={limitNumber}
+// @GET /product/get?page={pageNumber}&limit={limitNumber}
 route.get("/get", async (req, res) => {
    const page = Number(req.query.page);
    const limit = Number(req.query.limit);
@@ -60,45 +61,50 @@ route.get("/get", async (req, res) => {
    res.status(200).json(result);
 });
 
+// @POST /product/create
 route.post('/create', validateProductBody, async (req, res) => {
-   const {name, description, price, sizes, images} = req.body;
-   const productBody = {name, description, price};
+   const { name, description, price, sizes, images } = req.body;
+   const productBody = { name, description, price };
 
    try {
+      // Since sizes here is an array we need to iterate and add
+      // product id for sizes and images
       const [product] = await add(productBody);
       sizes.forEach(async (size: string) => {
-         const response = await addSizes({size});
-         await addProductSizeIds({size_id: response[0], product_id: product.id});
+         const response = await addSizes({ size });
+         await addProductSizeIds({ size_id: response[0], product_id: product.id });
       });
       images.forEach(async (img_url: string) => {
-         const response = await addImg({img_url});
-         await addProductImgIds({img_id: response[0], product_id: product.id});
+         const response = await addImg({ img_url });
+         await addProductImgIds({ img_id: response[0], product_id: product.id });
       });
-      res.status(201).json({message: "New product added successfully!."});
+      res.status(201).json({ message: "New product added successfully!." });
    } catch (error) {
-      res.status(500).json({errorMessage: error.message});
+      res.status(500).json({ errorMessage: error.message });
    }
 });
 
+// @PATCH /product/edit/:product_id
 route.patch("/edit/:product_id", validateId, async (req, res) => {
-   const {product_id} = req.params;
+   const { product_id } = req.params;
 
    try {
       await update(product_id, req.body);
-      res.status(200).json({message: "Prodcut updated successfully!."})
+      res.status(200).json({ message: "Prodcut updated successfully!." })
    } catch (error) {
-      res.status(500).json({errorMessage: error.message});
+      res.status(500).json({ errorMessage: error.message });
    }
 });
 
+// @DELETE /product/delete/:product_id
 route.delete("/delete/:product_id", validateId, async (req, res) => {
-   const {product_id} = req.params;
+   const { product_id } = req.params;
 
    try {
       await deleteProduct(product_id);
-      res.status(200).json({message: "Product deleted successfully!"});
+      res.status(200).json({ message: "Product deleted successfully!" });
    } catch (error) {
-      res.status(500).json({errorMessage: error.message});
+      res.status(500).json({ errorMessage: error.message });
    }
 })
 

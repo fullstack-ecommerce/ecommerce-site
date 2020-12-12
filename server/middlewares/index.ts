@@ -1,6 +1,7 @@
+import { Response } from 'express';
 import jwt from 'jsonwebtoken';
 import { secret_jtw } from "../envVariables";
-import { UserProps } from "../interfaces";
+import { UserProps } from "../interfaces/userInterfaces";
 
 export function generateToken(user: UserProps) {
    if(!secret_jtw) return; 
@@ -15,6 +16,6 @@ export function generateToken(user: UserProps) {
    return jwt.sign(payload, secret_jtw, options);
 }
 
-export function onError(res: any, statusCode: number, message: string) {
+export function onError(res: Response, statusCode: number, message: string) {
    return res.status(statusCode).json({errorMessage: message});
 }

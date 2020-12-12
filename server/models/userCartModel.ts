@@ -1,6 +1,10 @@
 import db from '../data/config-db';
-import { CartItemsProps, CartUserItemIdsProps } from '../interfaces';
+import { 
+   CartItemsProps, 
+   CartUserItemIdsProps 
+} from '../interfaces/productInterfaces';
 
+// Get user cart by id's
 function getUserCartByIds(user_id: string, cart_item_id: string) {
       return db("cart_item as ct")
          .join("user_cart as uc", "ct.id", "uc.cart_item_id")
@@ -9,10 +13,15 @@ function getUserCartByIds(user_id: string, cart_item_id: string) {
          // [{}];
 }
 
+// Get user cart.
+// this will return an array if multiple found
 function getUserCart(user_id: string) {
-   return db("cart_item as ct").join("user_cart as uc", "ct.id", "uc.cart_item_id").where({"uc.user_id": user_id});
+   return db("cart_item as ct")
+      .join("user_cart as uc", "ct.id", "uc.cart_item_id")
+      .where({"uc.user_id": user_id});
 }
 
+// Add product to cart
 function addToCart(cart: CartItemsProps) {
    return db("cart_item").insert(cart, 'id');
 }

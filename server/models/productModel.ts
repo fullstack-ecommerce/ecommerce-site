@@ -5,12 +5,15 @@ import {
    ProductProps, 
    ProductSizeIdsProps, 
    SizesProps 
-} from '../interfaces';
+} from '../interfaces/productInterfaces';
 
+// Get product by id
 function getById(id: string) {
    return db("product").where({id});
 }
 
+// Get all products with product comments, sizes, images, comments,
+// ratings since those are in separate tables we join them by product id
 async function getProducts() {
    const products = await db("product");
    return Promise.all(
@@ -45,14 +48,17 @@ function addImg(imgBody: ImgsProps) {
    return db("images").insert(imgBody, 'id');
 }
 
+// Add product sizes
 function addSizes(sizeBody: SizesProps) {
    return db("sizes").insert(sizeBody, 'id');
 }
 
+// Add product and images id's
 function addProductImgIds(idsBody: ProductImgIdsProps) {
    return db("product_img").insert(idsBody, "id");
 }
 
+// Add products and sizes id's
 function addProductSizeIds(idsBody: ProductSizeIdsProps) {
    return db("product_size").insert(idsBody, 'id');
 }
