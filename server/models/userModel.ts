@@ -1,5 +1,5 @@
 import db from '../data/config-db';
-import { FindByProp, UserProps } from '../interfaces';
+import { FindByProp, UserProps } from '../interfaces/userInterfaces';
 
 
 function findById(id: string) {

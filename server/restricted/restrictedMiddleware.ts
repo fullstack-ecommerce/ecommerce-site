@@ -1,3 +1,4 @@
+import { Response, NextFunction } from 'express';
 import jwt from 'jsonwebtoken';
 import { secret_jtw } from '../envVariables';
 import { onError } from '../middlewares';
@@ -6,7 +7,8 @@ enum Role {
    CLIENT, ADMIN
 }
 
-function validateToken(req: any, res: any, next: any) {
+// User needs to be registered in order to add items and leave reviews
+function validateToken(req: any, res: Response, next: NextFunction) {
    const { authorization } = req.headers; 
 
    if(!secret_jtw) return;
@@ -24,7 +26,9 @@ function validateToken(req: any, res: any, next: any) {
    }
 }
 
-function checkForRole(req: any, res: any, next: any) {
+// Only admins is able to make CRUD operations to products and
+// able to make users admins
+function checkForRole(req: any, res: Response, next: NextFunction) {
    if(req.decodedToken && req.decodedToken.isAdmin === Role.ADMIN) {
       next();
    } else {
