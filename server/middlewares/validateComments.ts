@@ -1,9 +1,14 @@
+import { Request, Response, NextFunction } from 'express';
 import { onError } from ".";
 import { getCommentById } from "../models/commentModel";
 import { getById } from "../models/productModel";
 import { findById } from "../models/userModel";
 
-async function validateCommentIds(req: any, res: any, next: any) {
+async function validateCommentIds(
+   req: Request, 
+   res: Response, 
+   next: NextFunction
+) {
    const { user_id, product_id } = req.params;
 
    const user = await findById(user_id);
@@ -16,10 +21,14 @@ async function validateCommentIds(req: any, res: any, next: any) {
    }
 }
 
-async function validateProductCommentIds(req: any, res: any, next: any) {
+async function validateProductCommentIds(
+   req: Request, 
+   res: Response, 
+   next: NextFunction
+) {
    const {product_id, comment_id} = req.params;
 
-   const comment = await getCommentById(comment_id);
+   const comment = await getCommentById(Number(comment_id));
    const product = await getById(product_id);
 
    if(!comment.length || !product.length) {

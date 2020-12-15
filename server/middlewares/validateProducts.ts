@@ -1,7 +1,12 @@
+import { Request, Response, NextFunction } from 'express';
 import { getById } from "../models/productModel";
 
 
-function validateProductBody(req: any, res: any, next: any) {
+function validateProductBody(
+   req: Request, 
+   res: Response, 
+   next: NextFunction
+) {
    const {name, description, price, sizes, images} = req.body;
    
    if(!name || !description || !price || !sizes.length || !images.length) {
@@ -10,7 +15,11 @@ function validateProductBody(req: any, res: any, next: any) {
       next();
    }
 }
-async function validateId(req: any, res: any, next: any) {
+async function validateId(
+   req: Request, 
+   res: Response, 
+   next: NextFunction
+) {
    const {product_id} = req.params;
 
    try {

@@ -1,15 +1,3 @@
-export interface UserProps {
-   username?: string;
-   email?: string;
-   password?: string;
-   reset_link?: string;
-}
-
-export interface FindByProp {
-   email?: string;
-   reset_link?: string;
-}
-
 export interface ProductProps {
    name?: string;
    price?: number
@@ -22,6 +10,26 @@ export interface ImgsProps {
 export interface SizesProps {
    size: string;
 }
+
+export interface NextPage {
+   page: number;
+   limit: number;
+}
+
+export interface CreateProductsProps {
+   name: string;
+   description: string;
+   price: number;
+   sizes: SizesProps[];
+   images: ImgsProps[];
+}
+
+export interface ResultProp {
+   next?: NextPage;
+   previous?: NextPage;
+   paginatedProducts?: CreateProductsProps[];
+}
+
 
 export interface ProductImgIdsProps {
    product_id: number;

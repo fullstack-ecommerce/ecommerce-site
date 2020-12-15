@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import gallery1 from "../../assets/images/gallery1.jpg";
 import gallery2 from "../../assets/images/gallery2.jpg";
 import gallery3 from "../../assets/images/gallery3.jpg";
@@ -18,6 +19,9 @@ const RenderProductScreen = () => {
   return (
     <>
       <div className="small__container single__product">
+        <Link to="/products">
+          <button>Go Back</button>
+        </Link>
         <div className="row__container">
           <div className="column__one">
             <img src={gallery1} alt="one" width="100%" />
