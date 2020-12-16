@@ -54,7 +54,11 @@ route.post('/login', validateLoginValues, async (req, res) => {
          const token = generateToken(user);
          res
             .status(200)
-            .json({ token, username: user.username, role: user.is_admin });
+            .json({ token,
+                username: user.username,
+                role: user.is_admin, 
+                user_id: user.id 
+            });
       } else {
          return onError(res, 400, "Invalid email or password");
       }

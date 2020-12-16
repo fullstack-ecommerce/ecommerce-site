@@ -14,6 +14,7 @@ export async function up(knex: Knex): Promise<any> {
       table.increments();
       table.string("product_name",128).notNullable();
       table.integer("product_price").notNullable();
+      table.string("product_size", 128).notNullable();
       table.integer("quantity").notNullable();
       table.string("product_img",255).notNullable();
       table.timestamp('created_at').defaultTo(knex.fn.now());

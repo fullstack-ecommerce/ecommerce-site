@@ -12,6 +12,40 @@ function getById(id: string) {
    return db("product").where({id});
 }
 
+// Get single product by id with all its imgs, comments, sizes, ratings
+async function getProductById(id: string) {
+   const [ product ] = await getById(id);
+
+   const sizes = await db("sizes as z")
+      .join("product_size as pz", "z.id", "pz.product_id")
+      .where({"pz.product_id": product.id})
+      .select("z.id", "z.size")
+
+   const images =  await db("images as i")
+      .join("product_img as pi", "i.id", "pi.img_id")
+      .where({"pi.product_id": product.id})
+      .select("i.id", "i.img_url");
+
+   const comments = await db("comments as c")
+      .join("product_comments as pc", "c.id", "pc.comment_id")
+      .where({"pc.product_id": product.id})
+      .select("c.id", "c.comment", "c.created_at")
+   const ratings = await db("ratings as r")
+      .join("product_ratings as pr", "r.id", "pr.rating_id")
+      .where({"pr.product_id": product.id})
+      .select("r.id", "r.rating", "r.created_at")
+
+   const singleProduct = {
+      ...product,
+      sizes,
+      images,
+      comments,
+      ratings
+   }
+   return Promise.all([ singleProduct ])
+      .then((values) => values);
+}
+
 // Get all products with product comments, sizes, images, comments,
 // ratings since those are in separate tables we join them by product id
 async function getProducts() {
@@ -73,6 +107,7 @@ function deleteProduct(id: string) {
 
 export {
    getById,
+   getProductById,
    getProducts,
    add,
    addImg,
