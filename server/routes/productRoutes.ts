@@ -10,7 +10,9 @@ import {
    addImg, 
    addProductImgIds, 
    update,
-   deleteProduct
+   deleteProduct,
+   getById,
+   getProductById
 } from '../models/productModel';
 import { checkForRole, validateToken } from '../restricted/restrictedMiddleware';
 
@@ -26,6 +28,18 @@ route.get("/get_all", async (req, res) => {
       res.status(500).json({errorMessage: error.message});
    }
 });
+
+//@GET /product/get/:product_id
+route.get("/get/:product_id", validateId, async (req, res) => {
+   const { product_id } = req.params;
+
+   try {
+      const [ product ] = await getProductById(product_id);
+      res.status(200).json(product);
+   } catch (error) {
+      res.status(500).json({errorMessage: error.message});
+   }
+})
 
 // @GET /product/get?page={pageNumber}&limit={limitNumber}
 route.get("/get", async (req, res) => {
