@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { Product } from "../../components/Product";
 import { listProducts } from "../../state/actions/productActions";
@@ -17,6 +16,8 @@ const RenderProductsListScreen = () => {
   useEffect(() => {
     dispatch(listProducts());
   }, [dispatch]);
+
+  console.log(products)
 
   return (
     <div className="small__container">
@@ -36,11 +37,12 @@ const RenderProductsListScreen = () => {
       <div className="row__container">
         {products.map((product) => {
           return (
-            <Link to={`/products/${product.id}`} key={product.id}>
+           
               <div className="column__three">
                 <Product product={product} />
+              
               </div>
-            </Link>
+         
           );
         })}
       </div>
