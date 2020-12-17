@@ -1,10 +1,10 @@
 import React from "react";
 import RenderProductScreen from "./RenderProductScreen";
 
-const ProductScreenContainer = () => {
+const ProductScreenContainer = (props) => {
   return (
     <div>
-      <RenderProductScreen />
+      <RenderProductScreen product={props.product} />
     </div>
   );
 };
