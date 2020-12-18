@@ -17,7 +17,7 @@ const RenderProductsListScreen = () => {
     dispatch(listProducts());
   }, [dispatch]);
 
-  console.log(products)
+  console.log(products);
 
   return (
     <div className="small__container">
@@ -37,12 +37,9 @@ const RenderProductsListScreen = () => {
       <div className="row__container">
         {products.map((product) => {
           return (
-           
-              <div className="column__three">
-                <Product product={product} />
-              
-              </div>
-         
+            <div className="column__three">
+              <Product product={product} />
+            </div>
           );
         })}
       </div>
