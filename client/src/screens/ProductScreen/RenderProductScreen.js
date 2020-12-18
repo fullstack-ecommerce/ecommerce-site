@@ -56,7 +56,7 @@ const RenderProductScreen = ({ match }) => {
       product_price: product.price,
       product_name: product.name,
       product_img: product.images[0].img_url,
-      product_size: product.sizes[0].size,
+      product_size: sizes,
       quantity,
     };
 
