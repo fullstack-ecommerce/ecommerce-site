@@ -4,6 +4,9 @@ import {
   CART_ADD_ITEM_SUCCESS,
   CART_ADD_ITEM_FAIL,
   CART_REMOVE_ITEM,
+  USER_CART_REQUEST,
+  USER_CART_SUCCESS,
+  USER_CART_FAIL,
 } from "../constants/cartConstants";
 
 export const addToCart = (product) => async (dispatch) => {
@@ -35,6 +38,27 @@ export const addToCart = (product) => async (dispatch) => {
     dispatch({
       type: CART_ADD_ITEM_FAIL,
       payload: error,
+    });
+  }
+};
+
+export const getUserCart = (id) => async (dispatch) => {
+  try {
+    dispatch({ type: USER_CART_REQUEST });
+
+    const { data } = await axios.get(`/user_cart/get_all/${id}`);
+
+    dispatch({
+      type: USER_CART_SUCCESS,
+      payload: data,
+    });
+  } catch (error) {
+    dispatch({
+      type: USER_CART_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
     });
   }
 };

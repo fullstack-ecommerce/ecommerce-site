@@ -43,6 +43,7 @@ const RenderNavbar = () => {
           )}
         </div>
         <Link to="/cartscreen">
+          <h6>My Cart</h6>
           <img src={cartIcon} alt="cart icon" className="cart__icon" />
         </Link>
       </div>
