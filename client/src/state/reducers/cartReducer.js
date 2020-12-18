@@ -3,9 +3,12 @@ import {
   CART_ADD_ITEM_SUCCESS,
   CART_ADD_ITEM_FAIL,
   CART_REMOVE_ITEM,
+  USER_CART_REQUEST,
+  USER_CART_SUCCESS,
+  USER_CART_FAIL,
 } from "../constants/cartConstants";
 
-export const cartReducer = (state = {}, action) => {
+export const cartAddItemReducer = (state = {}, action) => {
   switch (action.type) {
     case CART_ADD_ITEM_REQUEST:
       return {
@@ -19,6 +22,28 @@ export const cartReducer = (state = {}, action) => {
       };
 
     case CART_ADD_ITEM_FAIL:
+      return {
+        loading: false,
+        error: action.payload,
+      };
+    default:
+      return state;
+  }
+};
+
+export const userCartReducer = (state = { cart: [] }, action) => {
+  switch (action.type) {
+    case USER_CART_REQUEST:
+      return {
+        loading: true,
+        cart: [],
+      };
+    case USER_CART_SUCCESS:
+      return {
+        loading: false,
+        cart: action.payload,
+      };
+    case USER_CART_FAIL:
       return {
         loading: false,
         error: action.payload,
