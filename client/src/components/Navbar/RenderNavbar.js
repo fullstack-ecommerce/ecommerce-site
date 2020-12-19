@@ -12,6 +12,8 @@ const RenderNavbar = () => {
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
 
+  console.log(userInfo);
+
   const logoutHandler = () => {
     dispatch(logout());
   };
@@ -40,6 +42,9 @@ const RenderNavbar = () => {
               <Link to="/login">Login</Link>
               <Link to="/register">Register</Link>
             </>
+            )}
+          {userInfo && userInfo.role && (
+            <Link to="/admin/product/add">Add Product</Link>
           )}
         </div>
         <Link to="/cartscreen">

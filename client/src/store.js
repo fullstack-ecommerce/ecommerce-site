@@ -13,11 +13,13 @@ import {
 import {
   productListReducer,
   productDetailsReducer,
+  productCreateReducer,
 } from "./state/reducers/productReducers";
 
 const reducer = combineReducers({
   productList: productListReducer,
   productDetails: productDetailsReducer,
+  productCreate: productCreateReducer,
   userLogin: userLoginReducer,
   userRegister: userRegisterReducer,
   cartAddItem: cartAddItemReducer,
