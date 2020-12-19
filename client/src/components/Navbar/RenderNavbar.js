@@ -42,15 +42,22 @@ const RenderNavbar = () => {
               <Link to="/login">Login</Link>
               <Link to="/register">Register</Link>
             </>
-            )}
+          )}
           {userInfo && userInfo.role && (
-            <Link to="/admin/product/add">Add Product</Link>
+            <>
+              <Link to="/admin/product/add">Add Product</Link>
+              <Link to="/admin/products">
+                <h6>Products List</h6>
+              </Link>
+            </>
           )}
         </div>
-        <Link to="/cartscreen">
-          <h6>My Cart</h6>
-          <img src={cartIcon} alt="cart icon" className="cart__icon" />
-        </Link>
+        <>
+          <Link to="/cart">
+            <h6>My Cart</h6>
+            <img src={cartIcon} alt="cart icon" className="cart__icon" />
+          </Link>
+        </>
       </div>
     </div>
   );
