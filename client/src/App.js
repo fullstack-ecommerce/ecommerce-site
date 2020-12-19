@@ -1,6 +1,7 @@
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { Footer } from "./components/Footer";
 import { Navbar } from "./components/Navbar";
+import { AdminScreen } from "./screens/AdminScreen";
 import { CartScreen } from "./screens/CartScreen";
 import { HomeScreen } from "./screens/HomeScreen";
 import { LoginScreen } from "./screens/LoginScreen";
@@ -22,6 +23,7 @@ function App() {
 
         <Route exact path="/login" component={LoginScreen} />
         <Route exact path="/register" component={RegisterScreen} />
+        <Route exact path="/admin/product/add" component={AdminScreen} />
         <Route exact path="/" component={HomeScreen} />
       </Switch>
       <Footer />
