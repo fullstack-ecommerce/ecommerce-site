@@ -10,14 +10,9 @@ const RenderProductsListScreen = () => {
   const productList = useSelector((state) => state.productList);
   const { loading, error, products } = productList;
 
-  const userLogin = useSelector((state) => state.userLogin);
-  const { userInfo } = userLogin;
-
   useEffect(() => {
     dispatch(listProducts());
   }, [dispatch]);
-
-  console.log(products);
 
   return (
     <div className="small__container">
@@ -37,7 +32,7 @@ const RenderProductsListScreen = () => {
       <div className="row__container">
         {products.map((product) => {
           return (
-            <div className="column__three">
+            <div className="column__three" key={product.id}>
               <Product product={product} />
             </div>
           );

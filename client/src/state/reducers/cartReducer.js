@@ -2,7 +2,9 @@ import {
   CART_ADD_ITEM_REQUEST,
   CART_ADD_ITEM_SUCCESS,
   CART_ADD_ITEM_FAIL,
-  CART_REMOVE_ITEM,
+  CART_DELETE_ITEM_REQUEST,
+  CART_DELETE_ITEM_SUCCESS,
+  CART_DELETE_ITEM_FAIL,
   USER_CART_REQUEST,
   USER_CART_SUCCESS,
   USER_CART_FAIL,
@@ -22,6 +24,28 @@ export const cartAddItemReducer = (state = {}, action) => {
       };
 
     case CART_ADD_ITEM_FAIL:
+      return {
+        loading: false,
+        error: action.payload,
+      };
+    default:
+      return state;
+  }
+};
+
+export const cartDeleteItemReducer = (state = {}, action) => {
+  switch (action.type) {
+    case CART_DELETE_ITEM_REQUEST:
+      return {
+        loading: true,
+      };
+    case CART_DELETE_ITEM_SUCCESS:
+      return {
+        loading: false,
+        success: true,
+      };
+
+    case CART_DELETE_ITEM_FAIL:
       return {
         loading: false,
         error: action.payload,

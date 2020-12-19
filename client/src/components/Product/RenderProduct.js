@@ -4,7 +4,6 @@ import product1 from "../../assets/images/product1.jpg";
 import "./product.css";
 
 const RenderProduct = ({ product }) => {
-  console.log(product);
   return (
     <Link to={`/products/${product.id}`} key={product.id}>
       <img src={product1} alt="product 1" />
