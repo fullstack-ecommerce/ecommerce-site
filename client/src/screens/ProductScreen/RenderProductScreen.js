@@ -19,7 +19,7 @@ const initialState = {
   product_size: "",
 };
 
-const RenderProductScreen = ({ match }) => {
+const RenderProductScreen = () => {
   const [quantity, setQuantity] = useState(1);
   const [sizes, setSizes] = useState([]);
 
@@ -36,9 +36,6 @@ const RenderProductScreen = ({ match }) => {
 
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
-
-  const productList = useSelector((state) => state.productList);
-  const { loading, error, products } = productList;
 
   useEffect(() => {
     dispatch(listProductDetails(id));
