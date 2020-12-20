@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Product } from "../../components/Product";
 import { Button, Table, Row, Col } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
 import {
@@ -17,12 +16,8 @@ const RenderAdminProductsListScreen = () => {
 
   const productDelete = useSelector((state) => state.productDelete);
   const {
-    loading: loadingDelete,
-    error: errorDelete,
     success: successDelete,
   } = productDelete;
-
-  console.log(products);
 
   useEffect(() => {
     dispatch(listProducts());
@@ -34,11 +29,6 @@ const RenderAdminProductsListScreen = () => {
     }
   };
 
-  const createProductHandler = () => {
-    console.log("create");
-    //dispatch(createProduct());
-  };
-
   return (
     <div className="small__container">
       <div className="row__container">
@@ -47,9 +37,11 @@ const RenderAdminProductsListScreen = () => {
             <h1>Admin All Products</h1>
           </Col>
           <Col className="text-right">
-            <Button className="my-3" onClick={createProductHandler}>
-              <i className="fas fa-plus"></i> Create Product
-            </Button>
+            <LinkContainer to="/admin/product/add">
+              <Button className="my-3">
+                <i className="fas fa-plus"></i> Add Product
+              </Button>
+            </LinkContainer>
           </Col>
         </Row>
         {loading && <h3>Loading...</h3>}
@@ -84,7 +76,7 @@ const RenderAdminProductsListScreen = () => {
                 <td>{product.description}</td>
                 <td>{product.price}</td>
                 <td>
-                  <LinkContainer to={`/admin/product/${product._id}/edit`}>
+                  <LinkContainer to={`/admin/product/edit/${product.id}`}>
                     <Button variant="light" className="btn-sm">
                       <i className="fas fa-edit"></i>
                     </Button>

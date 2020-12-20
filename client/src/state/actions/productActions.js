@@ -12,6 +12,9 @@ import {
   PRODUCT_DELETE_REQUEST,
   PRODUCT_DELETE_SUCCESS,
   PRODUCT_DELETE_FAIL,
+  PRODUCT_UPDATE_REQUEST,
+  PRODUCT_UPDATE_SUCCESS,
+  PRODUCT_UPDATE_FAIL,
 } from "../constants/productConstants";
 import { logout } from "./userActions";
 
@@ -99,6 +102,38 @@ export const deleteProduct = (id) => async (dispatch) => {
     }
     dispatch({
       type: PRODUCT_DELETE_FAIL,
+      payload: message,
+    });
+  }
+};
+
+export const updateProduct = (id, value) => async (dispatch) => {
+  
+  try {
+    dispatch({
+      type: PRODUCT_UPDATE_REQUEST,
+    });
+
+    const { data } = await axios.patch(`/product/edit/${id}`, 
+      value,
+    );
+
+    dispatch({
+      type: PRODUCT_UPDATE_SUCCESS,
+      payload: data,
+    });
+    
+  } catch (error) {
+    console.log(error.response);
+    const message =
+      error.response && error.response.data.message
+        ? error.response.data.message
+        : error.message;
+    if (message === "Not authorized, token failed") {
+      dispatch(logout());
+    }
+    dispatch({
+      type: PRODUCT_UPDATE_FAIL,
       payload: message,
     });
   }
