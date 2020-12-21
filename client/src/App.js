@@ -2,13 +2,14 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { Footer } from "./components/Footer";
 import { Navbar } from "./components/Navbar";
 import { AdminProductsListScreen } from "./screens/AdminProductsListScreen";
-import { AdminScreen } from "./screens/AdminScreen";
+import { AdminAddProductScreen } from "./screens/AdminAddProductScreen";
 import { CartScreen } from "./screens/CartScreen";
 import { HomeScreen } from "./screens/HomeScreen";
 import { LoginScreen } from "./screens/LoginScreen";
 import { ProductScreen } from "./screens/ProductScreen";
 import { ProductsListScreen } from "./screens/ProductsListScreen";
 import { RegisterScreen } from "./screens/RegisterScreen";
+import { AdminUpdateProductScreen } from "./screens/AdminUpdateProductScreen";
 
 // hello there
 
@@ -24,8 +25,21 @@ function App() {
 
         <Route exact path="/login" component={LoginScreen} />
         <Route exact path="/register" component={RegisterScreen} />
-        <Route exact path="/admin/product/add" component={AdminScreen} />
-        <Route exact path="/admin/products" component={AdminProductsListScreen} />
+        <Route
+          exact
+          path="/admin/product/add"
+          component={AdminAddProductScreen}
+        />
+        <Route
+          exact
+          path="/admin/products"
+          component={AdminProductsListScreen}
+        />
+        <Route
+          exact
+          path="/admin/product/edit/:id"
+          component={AdminUpdateProductScreen}
+        />
         <Route exact path="/" component={HomeScreen} />
       </Switch>
       <Footer />

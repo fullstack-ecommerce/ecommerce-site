@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { createProduct } from "../../state/actions/productActions";
 
 import image1 from "../../assets/images/image1.png";
-import "./adminScreen.css";
+import "./adminAddProductScreen.css";
 
-const RenderAdminScreen = () => {
+const RenderAdminAddProductScreen = () => {
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [price, setPrice] = useState(0);
@@ -97,4 +97,4 @@ const RenderAdminScreen = () => {
   );
 };
 
-export default RenderAdminScreen;
+export default RenderAdminAddProductScreen;
