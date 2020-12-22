@@ -49,6 +49,9 @@ const RenderNavbar = () => {
               <Link to="/admin/products">
                 <h6>Products List</h6>
               </Link>
+              <Link to="/admin/users">
+                <h6>Users List</h6>
+              </Link>
             </>
           )}
         </div>

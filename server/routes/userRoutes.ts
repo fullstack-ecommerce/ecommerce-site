@@ -4,6 +4,7 @@ import {
    add, 
    deleteUser, 
    findBy, 
+   findById, 
    getUsers,
    updateUser 
 } from '../models/userModel';
@@ -66,6 +67,18 @@ route.post('/login', validateLoginValues, async (req, res) => {
       res.status(500).json({ errorMessage: error.message });
    }
 });
+
+// @GET /auth/get_user/:user_id
+route.get('/get_user/:user_id', async (req, res) => {
+   const { user_id } = req.params;
+
+   try {
+      const [user] = await findById(user_id);
+      res.status(200).json(user);
+   } catch (error) {
+      res.status(500).json({errorMessage: error.message});
+   }
+})
 
 // @DELETE /auth/delete/:user_id
 route.delete("/delete/:user_id", validateId, async (req, res) => {

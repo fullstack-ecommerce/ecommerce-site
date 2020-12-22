@@ -3,7 +3,9 @@ import { FindByProp, UserProps } from '../interfaces/userInterfaces';
 
 
 function findById(id: string) {
-   return db('users').where({id});
+   return db('users as u')
+      .where({id})
+      .select("u.id", "u.username", 'u.email', "u.is_admin", 'u.created_at');
 }
 
 function getUsers() {

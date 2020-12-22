@@ -10,6 +10,7 @@ import { ProductScreen } from "./screens/ProductScreen";
 import { ProductsListScreen } from "./screens/ProductsListScreen";
 import { RegisterScreen } from "./screens/RegisterScreen";
 import { AdminUpdateProductScreen } from "./screens/AdminUpdateProductScreen";
+import { AdminUsersListScreen } from "./screens/AdminUsersListScreen";
 
 // hello there
 
@@ -40,6 +41,7 @@ function App() {
           path="/admin/product/edit/:id"
           component={AdminUpdateProductScreen}
         />
+        <Route exact path="/admin/users" component={AdminUsersListScreen} />
         <Route exact path="/" component={HomeScreen} />
       </Switch>
       <Footer />
