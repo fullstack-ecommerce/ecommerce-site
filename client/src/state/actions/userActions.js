@@ -13,6 +13,9 @@ import {
   USER_DETAILS_REQUEST,
   USER_DETAILS_SUCCESS,
   USER_DETAILS_FAIL,
+  USER_DELETE_REQUEST,
+  USER_DELETE_SUCCESS,
+  USER_DELETE_FAIL,
 } from "../constants/userConstants.js";
 
 export const login = (email, password) => async (dispatch) => {
@@ -136,6 +139,30 @@ export const getUserDetails = (id) => async (dispatch) => {
     }
     dispatch({
       type: USER_DETAILS_FAIL,
+      payload: message,
+    });
+  }
+};
+
+export const deleteUser = (id) => async (dispatch) => {
+  try {
+    dispatch({
+      type: USER_DELETE_REQUEST,
+    });
+
+    await axios.delete(`/auth/delete/${id}`);
+
+    dispatch({ type: USER_DELETE_SUCCESS });
+  } catch (error) {
+    const message =
+      error.response && error.response.data.message
+        ? error.response.data.message
+        : error.message;
+    if (message === "Not authorized, token failed") {
+      dispatch(logout());
+    }
+    dispatch({
+      type: USER_DELETE_FAIL,
       payload: message,
     });
   }

@@ -41,7 +41,7 @@ const RenderNavbar = () => {
               <Link to="/register">Register</Link>
             </>
           )}
-          {userInfo && userInfo.role && (
+          {userInfo && userInfo.is_admin && (
             <>
               <Link to="/admin/product/add">Add Product</Link>
               <Link to="/admin/products">
