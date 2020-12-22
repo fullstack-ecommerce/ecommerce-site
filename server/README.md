@@ -33,7 +33,7 @@ Returns:
 {
     token: <string>,
     username: <string>,
-    role: <boolean>,
+    is_admin: <boolean>,
     user_id: <number>
 }
 ```
