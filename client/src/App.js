@@ -11,6 +11,7 @@ import { ProductsListScreen } from "./screens/ProductsListScreen";
 import { RegisterScreen } from "./screens/RegisterScreen";
 import { AdminUpdateProductScreen } from "./screens/AdminUpdateProductScreen";
 import { AdminUsersListScreen } from "./screens/AdminUsersListScreen";
+import { AdminUserUpdateScreen } from "./screens/AdminUserUpdateScreen";
 
 // hello there
 
@@ -42,6 +43,7 @@ function App() {
           component={AdminUpdateProductScreen}
         />
         <Route exact path="/admin/users" component={AdminUsersListScreen} />
+        <Route exact path="/admin/user/:id" component={AdminUserUpdateScreen} />
         <Route exact path="/" component={HomeScreen} />
       </Switch>
       <Footer />
