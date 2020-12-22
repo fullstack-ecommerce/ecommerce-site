@@ -33,8 +33,23 @@ Returns:
 {
     token: <string>,
     username: <string>,
-    role: <boolean>,
+    is_admin: <boolean>,
     user_id: <number>
+}
+```
+
+<br />
+
+> #### GET /auth/get_user/:user_id
+
+```
+Returns:
+{
+    id: <number>,
+    username: <string>,
+    email: <string>,
+    is_admin: <boolean>,
+    created_at: <timeStamp>
 }
 ```
 

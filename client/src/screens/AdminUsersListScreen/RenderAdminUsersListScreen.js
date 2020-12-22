@@ -44,13 +44,6 @@ const RenderAdminUsersListScreen = () => {
               <Col>
                 <h1>Admin All Users</h1>
               </Col>
-              <Col className="text-right">
-                <LinkContainer to="/admin/product/add">
-                  <Button className="my-3">
-                    <i className="fas fa-plus"></i> Add Product
-                  </Button>
-                </LinkContainer>
-              </Col>
             </Row>
           </div>
           <div className="row__container">
@@ -75,7 +68,7 @@ const RenderAdminUsersListScreen = () => {
                     <td>{user.email}</td>
                     <td>{user.is_admin}</td>
                     <td>
-                      <LinkContainer to={`/admin/edit/${user.id}`}>
+                      <LinkContainer to={`/admin/user/${user.id}`}>
                         <Button variant="light" className="btn-sm">
                           <i className="fas fa-edit"></i>
                         </Button>
