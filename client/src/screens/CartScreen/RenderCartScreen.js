@@ -23,7 +23,7 @@ const RenderCartScreen = () => {
 
   useEffect(() => {
     dispatch(getUserCart(userInfo.user_id));
-  }, [dispatch, success]);
+  }, [dispatch, success, userInfo.user_id]);
 
   const removeFromCartHandler = (id) => {
     if (window.confirm("Are you sure")) {
