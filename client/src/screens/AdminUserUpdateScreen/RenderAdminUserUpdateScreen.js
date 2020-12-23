@@ -1,29 +1,44 @@
 import React, { useState, useEffect } from "react";
-import { useParams, Link } from "react-router-dom";
+import { useParams, Link, useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { getUserDetails } from "../../state/actions/userActions";
+import { getUserDetails, updateUser } from "../../state/actions/userActions";
 import image1 from "../../assets/images/image1.png";
 import "./adminUserUpdateScreen.css";
+import { USER_UPDATE_RESET } from "../../state/constants/userConstants";
 
 const RenderAdminUserUpdateScreen = () => {
   const [value, setValue] = useState({
+    id: "",
     name: "",
-    email: "",
     is_admin: "",
   });
 
+  const history = useHistory();
   const dispatch = useDispatch();
   const { id } = useParams();
 
   const userDetails = useSelector((state) => state.userDetails);
   const { loading, error, user } = userDetails;
 
+  const userUpdate = useSelector((state) => state.userUpdate);
+  const {
+    loading: loadingUpdate,
+    error: errorUpdate,
+    success: successUpdate,
+  } = userUpdate;
+
+  console.log(user);
+
   useEffect(() => {
-    if (user) {
-      const { username, email, is_admin } = user;
-      setValue({ username, email, is_admin });
+    if (successUpdate) {
+      dispatch({ type: USER_UPDATE_RESET });
+      history.push("/admin/users");
     }
-  }, [user]);
+    if (user) {
+      const { id, username, is_admin } = user;
+      setValue({ id, username, is_admin });
+    }
+  }, [user, dispatch, successUpdate]);
 
   useEffect(() => {
     dispatch(getUserDetails(id));
@@ -31,6 +46,8 @@ const RenderAdminUserUpdateScreen = () => {
 
   const submitHandler = (e) => {
     e.preventDefault();
+
+    dispatch(updateUser(value));
   };
 
   const handleChange = (e) => {
@@ -52,8 +69,8 @@ const RenderAdminUserUpdateScreen = () => {
             <div className="form__btn">
               <h3>Update User</h3>
               <hr id="indicator" />
-              {loading && <h3>Loading...</h3>}
-              {error && <h3>{error}</h3>}
+              {loadingUpdate && <h3>Loading...</h3>}
+              {errorUpdate && <h3>{error}</h3>}
             </div>
 
             <form onSubmit={submitHandler}>
@@ -62,16 +79,16 @@ const RenderAdminUserUpdateScreen = () => {
                 type="name"
                 placeholder="Username"
                 value={value.username}
-                name="name"
+                name="username"
                 onChange={handleChange}
               />
-              <label htmlFor="email">Email</label>
+              <label htmlFor="email">Admin Cant Change User Email</label>
               <input
                 type="text"
                 placeholder="Email"
-                value={value.email}
+                value={user.email}
                 name="email"
-                onChange={handleChange}
+                readOnly
               />
               <label htmlFor="role">Is Admin</label>
               <input
