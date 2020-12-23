@@ -18,8 +18,6 @@ const RenderAdminUserUpdateScreen = () => {
   const userDetails = useSelector((state) => state.userDetails);
   const { loading, error, user } = userDetails;
 
-  console.log(user);
-
   useEffect(() => {
     if (user) {
       const { username, email, is_admin } = user;

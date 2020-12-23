@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Button, Table, Row, Col } from "react-bootstrap";
 import { useHistory } from "react-router-dom";
 import { LinkContainer } from "react-router-bootstrap";
-import { listUsers } from "../../state/actions/userActions";
+import { listUsers, deleteUser } from "../../state/actions/userActions";
 import "./adminUsersListScreen.css";
 
 const RenderAdminUsersListScreen = () => {
@@ -16,19 +16,21 @@ const RenderAdminUsersListScreen = () => {
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
 
+  const userDelete = useSelector((state) => state.userDelete);
+  const { success: successDelete } = userDelete;
+
   useEffect(() => {
-    if (userInfo.role) {
+    if (userInfo.is_admin) {
       dispatch(listUsers());
     } else {
       history.push("/login");
     }
-  }, [dispatch, userInfo, history]);
+  }, [dispatch, userInfo, history, successDelete]);
 
   const deleteHandler = (id) => {
-    console.log("hello from deletehandler");
-    // if (window.confirm("Are you sure")) {
-    //   dispatch(deleteProduct(id));
-    // }
+    if (window.confirm("Are you sure")) {
+      dispatch(deleteUser(id));
+    }
   };
 
   return (
