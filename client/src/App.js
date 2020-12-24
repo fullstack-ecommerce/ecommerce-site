@@ -12,6 +12,7 @@ import { RegisterScreen } from "./screens/RegisterScreen";
 import { AdminUpdateProductScreen } from "./screens/AdminUpdateProductScreen";
 import { AdminUsersListScreen } from "./screens/AdminUsersListScreen";
 import { AdminUserUpdateScreen } from "./screens/AdminUserUpdateScreen";
+import { UserProfileScreen } from "./screens/UserProfileScreen";
 
 // hello there
 
@@ -27,6 +28,7 @@ function App() {
 
         <Route exact path="/login" component={LoginScreen} />
         <Route exact path="/register" component={RegisterScreen} />
+        <Route exact path="/profile" component={UserProfileScreen} />
         <Route
           exact
           path="/admin/product/add"

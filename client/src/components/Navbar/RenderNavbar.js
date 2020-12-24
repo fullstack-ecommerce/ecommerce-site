@@ -33,6 +33,9 @@ const RenderNavbar = () => {
             <div>
               <h6>Welcome</h6>
               <h3>{userInfo.username}</h3>
+              <Link to="/profile">
+                <h3>Profile</h3>
+              </Link>
               <button onClick={logoutHandler}>Logout</button>
             </div>
           ) : (
