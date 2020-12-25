@@ -10,18 +10,23 @@ import "./userProfileScreen.css";
 import { USER_UPDATE_PROFILE_RESET } from "../../state/constants/userConstants";
 
 const RenderUserProfileScreen = () => {
-  const [value, setValue] = useState({
-    id: "",
-    username: "",
-    is_admin: "",
-  });
+  const [username, setUserName] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [message, setMessage] = useState("");
 
   const history = useHistory();
   const dispatch = useDispatch();
-  const { id } = useParams();
+
+  const userLogin = useSelector((state) => state.userLogin);
+  const { userInfo } = userLogin;
+  const { user_id } = userInfo;
 
   const userDetails = useSelector((state) => state.userDetails);
   const { loading, error, user } = userDetails;
+
+  console.log(userInfo);
+  console.log(user_id);
 
   const userUpdateProfile = useSelector((state) => state.userUpdateProfile);
   const {
@@ -30,31 +35,32 @@ const RenderUserProfileScreen = () => {
     success: successUpdate,
   } = userUpdateProfile;
 
-  console.log(user);
+  useEffect(() => {
+    if (userInfo) {
+      const { username } = userInfo;
+      setUserName(username);
+    }
+  }, [userInfo]);
 
   useEffect(() => {
     if (successUpdate) {
       dispatch({ type: USER_UPDATE_PROFILE_RESET });
       history.push("/");
     }
-    if (user) {
-      const { id, username, is_admin } = user;
-      setValue({ id, username, is_admin });
-    }
-  }, [user, dispatch, successUpdate]);
+  }, [history, dispatch, successUpdate]);
 
   useEffect(() => {
-    dispatch(getUserDetails(id));
-  }, [dispatch, id]);
+    dispatch(getUserDetails(user_id));
+  }, [dispatch, user_id]);
 
   const submitHandler = (e) => {
     e.preventDefault();
 
-    dispatch(updateUserProfile(value));
-  };
-
-  const handleChange = (e) => {
-    setValue({ ...value, [e.target.name]: e.target.value });
+    if (password !== confirmPassword) {
+      setMessage("Passwords do not match!");
+    } else {
+      dispatch(updateUserProfile(user_id, username, password));
+    }
   };
 
   return (
@@ -72,26 +78,35 @@ const RenderUserProfileScreen = () => {
             <div className="form__btn">
               <h3>Profile</h3>
               <hr id="indicator" />
+              {message && <h4>{message}</h4>}
               {loadingUpdate && <h3>Loading...</h3>}
-              {errorUpdate && <h3>{error}</h3>}
+              {errorUpdate && <h3>{errorUpdate}</h3>}
             </div>
 
             <form onSubmit={submitHandler}>
               <label htmlFor="name">Username</label>
               <input
-                type="name"
-                placeholder="Username"
-                value={value.username}
-                name="username"
-                onChange={handleChange}
-              />
-              <label htmlFor="email">Cant Change User Email</label>
-              <input
                 type="text"
-                placeholder="Email"
-                value={user.email}
-                name="email"
-                readOnly
+                placeholder="Username"
+                value={username}
+                name="username"
+                onChange={(e) => setUserName(e.target.value)}
+              />
+              <label htmlFor="password">Password</label>
+              <input
+                type="password"
+                placeholder="Password"
+                value={password}
+                name="password"
+                onChange={(e) => setPassword(e.target.value)}
+              />
+              <label htmlFor="confirmPassword">Confirm Password</label>
+              <input
+                type="password"
+                placeholder="Confirm Password"
+                value={confirmPassword}
+                name="confirmPassword"
+                onChange={(e) => setConfirmPassword(e.target.value)}
               />
 
               <button type="submit" className="login__btn">
