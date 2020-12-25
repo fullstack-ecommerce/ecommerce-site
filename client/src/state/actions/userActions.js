@@ -203,13 +203,14 @@ export const updateUser = (user) => async (dispatch) => {
   }
 };
 
-export const updateUserProfile = (user) => async (dispatch) => {
+
+export const updateUserProfile = (user_id, username, password) => async (dispatch) => {
   try {
     dispatch({
       type: USER_UPDATE_PROFILE_REQUEST,
     });
 
-    const { data } = await axios.patch(`/auth/edit/${user.id}`, user);
+    const { data } = await axios.patch(`/auth/edit/${user_id}`, {username, password});
 
     dispatch({
       type: USER_UPDATE_PROFILE_SUCCESS,
@@ -225,9 +226,7 @@ export const updateUserProfile = (user) => async (dispatch) => {
       error.response && error.response.data.message
         ? error.response.data.message
         : error.message;
-    if (message === "Not authorized, token failed") {
-      dispatch(logout());
-    }
+    
     dispatch({
       type: USER_UPDATE_PROFILE_FAIL,
       payload: message,
