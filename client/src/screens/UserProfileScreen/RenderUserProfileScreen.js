@@ -1,13 +1,16 @@
 import React, { useState, useEffect } from "react";
-import { useParams, Link, useHistory } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import {
   getUserDetails,
   updateUserProfile,
+  updateUserPassword,
 } from "../../state/actions/userActions";
-import image1 from "../../assets/images/image1.png";
 import "./userProfileScreen.css";
-import { USER_UPDATE_PROFILE_RESET } from "../../state/constants/userConstants";
+import {
+  USER_UPDATE_PASSWORD_RESET,
+  USER_UPDATE_PROFILE_RESET,
+} from "../../state/constants/userConstants";
 
 const RenderUserProfileScreen = () => {
   const [username, setUserName] = useState("");
@@ -25,15 +28,19 @@ const RenderUserProfileScreen = () => {
   const userDetails = useSelector((state) => state.userDetails);
   const { loading, error, user } = userDetails;
 
-  console.log(userInfo);
-  console.log(user_id);
-
   const userUpdateProfile = useSelector((state) => state.userUpdateProfile);
   const {
     loading: loadingUpdate,
     error: errorUpdate,
     success: successUpdate,
   } = userUpdateProfile;
+
+  const userUpdatePassword = useSelector((state) => state.userUpdatePassword);
+  const {
+    loading: loadingPassword,
+    error: errorPassword,
+    success: successPassword,
+  } = userUpdatePassword;
 
   useEffect(() => {
     if (userInfo) {
@@ -44,22 +51,32 @@ const RenderUserProfileScreen = () => {
 
   useEffect(() => {
     if (successUpdate) {
+      window.confirm("Username Successfully Updated!");
       dispatch({ type: USER_UPDATE_PROFILE_RESET });
-      history.push("/");
     }
-  }, [history, dispatch, successUpdate]);
+    if (successPassword) {
+      window.confirm("Password Successfully Changed!");
+      dispatch({ type: USER_UPDATE_PASSWORD_RESET });
+    }
+  }, [history, dispatch, successUpdate, successPassword]);
 
   useEffect(() => {
     dispatch(getUserDetails(user_id));
   }, [dispatch, user_id]);
 
-  const submitHandler = (e) => {
+  const submitUserNameHandler = (e) => {
+    e.preventDefault();
+
+    dispatch(updateUserProfile(username));
+  };
+
+  const submitPasswordHandler = (e) => {
     e.preventDefault();
 
     if (password !== confirmPassword) {
       setMessage("Passwords do not match!");
     } else {
-      dispatch(updateUserProfile(user_id, username, password));
+      dispatch(updateUserPassword(password));
     }
   };
 
@@ -67,23 +84,16 @@ const RenderUserProfileScreen = () => {
     <div className="login__container">
       <div className="row__container">
         <div className="column__one logo__image">
-          <img src={image1} alt="logo" />
-        </div>
-
-        <div className="column__one">
-          <Link to="/admin/users">
-            <button>Go Back</button>
-          </Link>
           <div className="form__container">
             <div className="form__btn">
-              <h3>Profile</h3>
+              <h3>Update Username</h3>
               <hr id="indicator" />
               {message && <h4>{message}</h4>}
               {loadingUpdate && <h3>Loading...</h3>}
               {errorUpdate && <h3>{errorUpdate}</h3>}
             </div>
 
-            <form onSubmit={submitHandler}>
+            <form onSubmit={submitUserNameHandler}>
               <label htmlFor="name">Username</label>
               <input
                 type="text"
@@ -92,6 +102,28 @@ const RenderUserProfileScreen = () => {
                 name="username"
                 onChange={(e) => setUserName(e.target.value)}
               />
+
+              <button type="submit" className="login__btn">
+                Update Username
+              </button>
+            </form>
+          </div>
+        </div>
+
+        <div className="column__one">
+          <Link to="/admin/users">
+            <button>Go Back</button>
+          </Link>
+          <div className="form__container">
+            <div className="form__btn">
+              <h3>Change Password</h3>
+              <hr id="indicator" />
+              {message && <h4>{message}</h4>}
+              {loadingPassword && <h3>Loading...</h3>}
+              {errorPassword && <h3>{errorPassword}</h3>}
+            </div>
+
+            <form onSubmit={submitPasswordHandler}>
               <label htmlFor="password">Password</label>
               <input
                 type="password"
@@ -110,11 +142,7 @@ const RenderUserProfileScreen = () => {
               />
 
               <button type="submit" className="login__btn">
-                Update User
-              </button>
-
-              <button type="submit" className="login__btn">
-                Delete Your Account
+                Update Password
               </button>
             </form>
           </div>
