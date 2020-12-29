@@ -20,6 +20,12 @@ import {
   USER_UPDATE_SUCCESS,
   USER_UPDATE_FAIL,
   USER_DETAILS_RESET,
+  USER_UPDATE_PROFILE_REQUEST,
+  USER_UPDATE_PROFILE_SUCCESS,
+  USER_UPDATE_PROFILE_FAIL,
+  USER_UPDATE_PASSWORD_REQUEST,
+  USER_UPDATE_PASSWORD_SUCCESS,
+  USER_UPDATE_PASSWORD_FAIL,
 } from "../constants/userConstants.js";
 
 export const login = (email, password) => async (dispatch) => {
@@ -195,6 +201,74 @@ export const updateUser = (user) => async (dispatch) => {
     }
     dispatch({
       type: USER_UPDATE_FAIL,
+      payload: message,
+    });
+  }
+};
+
+export const updateUserProfile = (username) => async (dispatch, getState) => {
+  try {
+    dispatch({
+      type: USER_UPDATE_PROFILE_REQUEST,
+    });
+
+    const {
+      userLogin: { userInfo },
+    } = getState()
+
+    const { data } = await axios.patch(`/auth/edit/${userInfo.user_id}`, { username });
+
+    dispatch({
+      type: USER_UPDATE_PROFILE_SUCCESS,
+      payload: data,
+    });
+    dispatch({
+      type: USER_LOGIN_SUCCESS,
+      payload: data,
+    });
+    localStorage.setItem("userInfo", JSON.stringify(data));
+  } catch (error) {
+    const message =
+      error.response && error.response.data.message
+        ? error.response.data.message
+        : error.message;
+
+    dispatch({
+      type: USER_UPDATE_PROFILE_FAIL,
+      payload: message,
+    });
+  }
+};
+
+export const updateUserPassword = (password) => async (dispatch, getState) => {
+  try {
+    dispatch({
+      type: USER_UPDATE_PASSWORD_REQUEST,
+    });
+
+    const {
+      userLogin: { userInfo },
+    } = getState()
+
+    const { data } = await axios.patch(`/auth/edit/${userInfo.user_id}`, { password });
+
+    dispatch({
+      type: USER_UPDATE_PASSWORD_SUCCESS,
+      payload: data,
+    });
+    dispatch({
+      type: USER_LOGIN_SUCCESS,
+      payload: data,
+    });
+    localStorage.setItem("userInfo", JSON.stringify(data));
+  } catch (error) {
+    const message =
+      error.response && error.response.data.message
+        ? error.response.data.message
+        : error.message;
+
+    dispatch({
+      type: USER_UPDATE_PASSWORD_FAIL,
       payload: message,
     });
   }
