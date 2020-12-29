@@ -1,31 +1,34 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useHistory } from "react-router-dom";
-import { login } from "../../state/actions/userActions";
+import { useHistory } from "react-router-dom";
+import { forgotPassword } from "../../state/actions/userActions";
 
 import image1 from "../../assets/images/image1.png";
-import "./loginScreen.css";
+import "./forgotPasswordScreen.css";
 
-const RenderLoginScreen = () => {
+const RenderForgotPasswordScreen = () => {
   const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
 
   const dispatch = useDispatch();
   const history = useHistory();
 
-  const userLogin = useSelector((state) => state.userLogin);
-  const { loading, error, userInfo } = userLogin;
+  //   const userLogin = useSelector((state) => state.userLogin);
+  //     const { loading, error, userInfo } = userLogin;
+
+  const userForgotPassword = useSelector((state) => state.userForgotPassword);
+  const { loading, error, success } = userForgotPassword;
 
   useEffect(() => {
-    if (userInfo) {
-      history.push("/");
+    if (success) {
+      window.confirm("Email reset password sent!");
+      history.push("/login");
     }
-  }, [history, userInfo]);
+  }, [history, success]);
 
   const submitHandler = (e) => {
     e.preventDefault();
 
-    dispatch(login(email, password));
+    dispatch(forgotPassword(email));
   };
 
   return (
@@ -38,36 +41,24 @@ const RenderLoginScreen = () => {
         <div className="column__one">
           <div className="form__container">
             <div className="form__btn">
-              <h3>Login</h3>
+              <h3>Forgot Password</h3>
               <hr id="indicator" />
               {error && <h6>{error}</h6>}
               {loading && <h3>loading...</h3>}
             </div>
 
             <form onSubmit={submitHandler}>
+              <label htmlFor="email">Enter your email</label>
               <input
                 type="email"
                 placeholder="Email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
               />
-              <input
-                type="password"
-                placeholder="Password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-              />
+
               <button type="submit" className="login__btn">
-                Login
+                Submit
               </button>
-              <div className="register__link">
-                <p>
-                  Don't have an account?{" "}
-                  <Link to={"/register"}>Register Here.</Link>
-                </p>
-                <br />
-                <Link to="/forgotpassword">Forgot password</Link>
-              </div>
             </form>
           </div>
         </div>
@@ -76,4 +67,4 @@ const RenderLoginScreen = () => {
   );
 };
 
-export default RenderLoginScreen;
+export default RenderForgotPasswordScreen;
