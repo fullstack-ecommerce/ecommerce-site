@@ -13,6 +13,8 @@ import { AdminUpdateProductScreen } from "./screens/AdminUpdateProductScreen";
 import { AdminUsersListScreen } from "./screens/AdminUsersListScreen";
 import { AdminUserUpdateScreen } from "./screens/AdminUserUpdateScreen";
 import { UserProfileScreen } from "./screens/UserProfileScreen";
+import { ForgotPasswordScreen } from "./screens/ForgotPasswordScreen";
+
 
 // hello there
 
@@ -28,6 +30,7 @@ function App() {
 
         <Route exact path="/login" component={LoginScreen} />
         <Route exact path="/register" component={RegisterScreen} />
+        <Route exact path="/forgotpassword" component={ForgotPasswordScreen} />
         <Route exact path="/profile" component={UserProfileScreen} />
         <Route
           exact
