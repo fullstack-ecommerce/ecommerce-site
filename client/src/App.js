@@ -14,6 +14,7 @@ import { AdminUsersListScreen } from "./screens/AdminUsersListScreen";
 import { AdminUserUpdateScreen } from "./screens/AdminUserUpdateScreen";
 import { UserProfileScreen } from "./screens/UserProfileScreen";
 import { ForgotPasswordScreen } from "./screens/ForgotPasswordScreen";
+import { PasswordResetScreen } from "./screens/PasswordResetScreen";
 
 
 // hello there
@@ -31,6 +32,7 @@ function App() {
         <Route exact path="/login" component={LoginScreen} />
         <Route exact path="/register" component={RegisterScreen} />
         <Route exact path="/forgotpassword" component={ForgotPasswordScreen} />
+        <Route exact path="/passwordreset/:id" component={PasswordResetScreen} />
         <Route exact path="/profile" component={UserProfileScreen} />
         <Route
           exact
