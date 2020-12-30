@@ -29,6 +29,9 @@ import {
   USER_FORGOT_PASSWORD_REQUEST,
   USER_FORGOT_PASSWORD_SUCCESS,
   USER_FORGOT_PASSWORD_FAIL,
+  USER_RESET_PASSWORD_REQUEST,
+  USER_RESET_PASSWORD_SUCCESS,
+  USER_RESET_PASSWORD_FAIL,
 } from "../constants/userConstants.js";
 
 export const login = (email, password) => async (dispatch) => {
@@ -301,6 +304,33 @@ export const forgotPassword = (email) => async (dispatch) => {
 
     dispatch({
       type: USER_FORGOT_PASSWORD_FAIL,
+      payload: message,
+    });
+  }
+};
+
+export const resetPassword = (password, id) => async (dispatch) => {
+  try {
+    dispatch({
+      type: USER_RESET_PASSWORD_REQUEST,
+    });
+
+    const { data } = await axios.patch(`/auth/reset_password/${id}`, {
+      password,
+    });
+
+    dispatch({
+      type: USER_RESET_PASSWORD_SUCCESS,
+      payload: data,
+    });
+  } catch (error) {
+    const message =
+      error.response && error.response.data.message
+        ? error.response.data.message
+        : error.message;
+
+    dispatch({
+      type: USER_RESET_PASSWORD_FAIL,
       payload: message,
     });
   }

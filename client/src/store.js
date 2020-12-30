@@ -11,6 +11,7 @@ import {
   userUpdateProfileReducer,
   userUpdatePasswordReducer,
   userForgotPasswordReducer,
+  userResetPasswordReducer,
 } from "./state/reducers/userReducers";
 import {
   cartAddItemReducer,
@@ -40,6 +41,7 @@ const reducer = combineReducers({
   userUpdateProfile: userUpdateProfileReducer,
   userUpdatePassword: userUpdatePasswordReducer,
   userForgotPassword: userForgotPasswordReducer,
+  userResetPassword: userResetPasswordReducer,
   cartAddItem: cartAddItemReducer,
   cartDeleteItem: cartDeleteItemReducer,
   userCart: userCartReducer,
