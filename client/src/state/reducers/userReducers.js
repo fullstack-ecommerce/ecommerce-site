@@ -31,6 +31,7 @@ import {
   USER_FORGOT_PASSWORD_REQUEST,
   USER_FORGOT_PASSWORD_SUCCESS,
   USER_FORGOT_PASSWORD_FAIL,
+  USER_FORGOT_PASSWORD_RESET,
 } from "../constants/userConstants.js";
 
 export const userLoginReducer = (state = {}, action) => {
@@ -156,9 +157,11 @@ export const userForgotPasswordReducer = (state = {}, action) => {
     case USER_FORGOT_PASSWORD_REQUEST:
       return { loading: true };
     case USER_FORGOT_PASSWORD_SUCCESS:
-      return { loading: false, success: true };
+      return { loading: false, success: true, message: action.payload };
     case USER_FORGOT_PASSWORD_FAIL:
       return { loading: false, error: action.payload };
+    case USER_FORGOT_PASSWORD_RESET:
+      return {};
     default:
       return state;
   }

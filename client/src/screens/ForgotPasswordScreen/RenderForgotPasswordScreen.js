@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { forgotPassword } from "../../state/actions/userActions";
+import { USER_FORGOT_PASSWORD_RESET } from "../../state/constants/userConstants";
 
 import image1 from "../../assets/images/image1.png";
 import "./forgotPasswordScreen.css";
@@ -12,16 +13,14 @@ const RenderForgotPasswordScreen = () => {
   const dispatch = useDispatch();
   const history = useHistory();
 
-  //   const userLogin = useSelector((state) => state.userLogin);
-  //     const { loading, error, userInfo } = userLogin;
-
   const userForgotPassword = useSelector((state) => state.userForgotPassword);
-  const { loading, error, success } = userForgotPassword;
+  const { loading, error, success, message } = userForgotPassword;
 
   useEffect(() => {
     if (success) {
-      window.confirm("Email reset password sent!");
+      window.confirm("Email sent!");
       history.push("/login");
+      dispatch({ type: USER_FORGOT_PASSWORD_RESET });
     }
   }, [history, success]);
 
