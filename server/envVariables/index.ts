@@ -5,3 +5,5 @@ export const gmailPassword = process.env.GMAIL_PASS;
 export const resetPassword = process.env.RESET_PASS;
 export const sendTo = process.env.SEND_TO;
 export const clientUrl = process.env.CLIENT_URL;
+export const sendGrdiKey = process.env.SENDGRID_KEY;
+export const sender = process.env.SENDER;
