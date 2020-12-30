@@ -287,7 +287,7 @@ export const forgotPassword = (email) => async (dispatch) => {
       type: USER_FORGOT_PASSWORD_REQUEST,
     });
 
-    const { data } = await axios.patch(`/auth/forgot_password`, email);
+    const { data } = await axios.patch(`/auth/forgot_password`, { email });
 
     dispatch({
       type: USER_FORGOT_PASSWORD_SUCCESS,
