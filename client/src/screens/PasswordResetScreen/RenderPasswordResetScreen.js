@@ -10,6 +10,7 @@ import "./passwordResetScreen.css";
 const RenderPasswordResetScreen = () => {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const [message, setMessage] = useState("");
 
   const { id } = useParams();
 
@@ -17,7 +18,7 @@ const RenderPasswordResetScreen = () => {
   const history = useHistory();
 
   const userResetPassword = useSelector((state) => state.userResetPassword);
-  const { loading, error, success, message } = userResetPassword;
+  const { loading, error, success, message: resetMessage } = userResetPassword;
 
   useEffect(() => {
     if (success) {
@@ -30,7 +31,11 @@ const RenderPasswordResetScreen = () => {
   const submitHandler = (e) => {
     e.preventDefault();
 
-    dispatch(resetPassword(password, id));
+    if (password !== confirmPassword) {
+      setMessage("Passwords do not match!");
+    } else {
+      dispatch(resetPassword(password, id));
+    }
   };
 
   return (
@@ -45,7 +50,7 @@ const RenderPasswordResetScreen = () => {
             <div className="form__btn">
               <h3>Reset Password</h3>
               <hr id="indicator" />
-              {error && <h6>{error}</h6>}
+              {message && <h4>{message}</h4>}
               {loading && <h3>loading...</h3>}
             </div>
 
@@ -58,7 +63,7 @@ const RenderPasswordResetScreen = () => {
                 onChange={(e) => setPassword(e.target.value)}
               />
 
-              <label htmlFor="password">Confirm password</label>
+              <label htmlFor="confirmPassword">Confirm password</label>
               <input
                 type="password"
                 placeholder="Confirm password"
