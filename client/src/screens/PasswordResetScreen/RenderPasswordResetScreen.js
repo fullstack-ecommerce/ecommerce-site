@@ -13,7 +13,7 @@ const RenderPasswordResetScreen = () => {
   const [message, setMessage] = useState("");
 
   const { id } = useParams();
-
+ 
   const dispatch = useDispatch();
   const history = useHistory();
 

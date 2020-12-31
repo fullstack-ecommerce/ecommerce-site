@@ -309,13 +309,13 @@ export const forgotPassword = (email) => async (dispatch) => {
   }
 };
 
-export const resetPassword = (password, id) => async (dispatch) => {
+export const resetPassword = (password, token) => async (dispatch) => {
   try {
     dispatch({
       type: USER_RESET_PASSWORD_REQUEST,
     });
 
-    const { data } = await axios.patch(`/auth/reset_password/${id}`, {
+    const { data } = await axios.patch(`/auth/reset_password/${token}`, {
       password,
     });
 
