@@ -47,9 +47,6 @@ function updatedPasswordEmail(email: string) {
       })
 }
 
-
-
-
 export {
    resetPasswordEmail,
    updatedPasswordEmail

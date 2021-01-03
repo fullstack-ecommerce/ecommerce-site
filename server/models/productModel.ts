@@ -63,8 +63,9 @@ async function getProducts() {
             .select("i.id", "i.img_url"),
          comments: await db("comments as c")
             .join("product_comments as pc", "c.id", "pc.comment_id")
+            .join('users as u', "u.id", "pc.user_id")
             .where({"pc.product_id": product.id})
-            .select("c.id", "c.comment", "c.created_at"),
+            .select("c.id", "c.comment", "c.created_at", "u.username"),
          ratings: await db("ratings as r")
             .join("product_ratings as pr", "r.id", "pr.rating_id")
             .where({"pr.product_id": product.id})
